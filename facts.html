@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFacts: Cosmic Facts</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="facts.css">
+</head>
+<body>
+
+    <!-- Background Space Canvas System -->
+    <canvas id="universe-background" class="universe-bg"></canvas>
+
+    <!-- Global Glowing Header -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-galaxy logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <nav class="nav-links">
+                <a href="#origin" class="active">Cosmic Cards</a>
+                <a href="#playground">Physics Lab</a>
+                <a href="#comms-link">CMB Decoder</a>
+            </nav>
+            <div class="header-actions">
+                <!-- Home Button -->
+                <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Hub</span>
+                </a>
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container" style="margin-right: 12px;">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel">
+                        <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                        <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                        <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                        <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                        <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                        <a href="#" class="active"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                        <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                    </div>
+                </div>
+                <button id="student-toggle" class="btn-glow btn-student" title="Launch Fact Manual">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Study Deck</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Origin Section -->
+    <section id="origin" class="section-padding origin-hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">DEEP COSMOS ASTROPHYSICS LAB</span>
+                <h1 class="glitch-title" data-text="COSMIC FACTS">COSMIC FACTS</h1>
+                <p class="hero-subtitle">
+                    Explore the fundamental limits of spacetime. Model time dilation near supermassive black holes, weigh neutron star matter, scale the observable universe, and decrypt the relic echo of the Big Bang.
+                </p>
+                <div class="hero-actions">
+                    <a href="#playground" class="btn-primary">
+                        <i class="fa-solid fa-calculator"></i> Launch Physics Lab
+                    </a>
+                    <a href="#comms-link" class="btn-secondary">
+                        <i class="fa-solid fa-radio"></i> Capture CMB Noise
+                    </a>
+                </div>
+            </div>
+
+            <!-- Cosmic Fact Cards Grid -->
+            <div class="mission-grid">
+                <!-- Fact 1: Time Dilation -->
+                <div class="mission-card" onclick="selectFactDirectly(0)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-dilation"></canvas>
+                        <span class="card-tag tag-dilation">SPACETIME WARP</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>General Relativity</h3>
+                        <p>Gravity bends time itself. The massive gravitational field of a black hole stretches spacetime so extremely that one hour near its horizon equals years on Earth.</p>
+                        <span class="card-meta">Theory: General Relativity | Formula: Einstein's Field Equations</span>
+                    </div>
+                </div>
+
+                <!-- Fact 2: Observable Universe -->
+                <div class="mission-card" onclick="selectFactDirectly(1)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-universe"></canvas>
+                        <span class="card-tag tag-universe">SCALE & SIZE</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>93 Billion Light-Years</h3>
+                        <p>Because the universe has been expanding for 13.8 billion years, the edge of the observable universe is now a whopping 46.5 billion light-years in any direction.</p>
+                        <span class="card-meta">Scale: 10^26 Meters | Expansion Factor: Hubble's Constant</span>
+                    </div>
+                </div>
+
+                <!-- Fact 3: Neutron Star Density -->
+                <div class="mission-card" onclick="selectFactDirectly(2)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-density"></canvas>
+                        <span class="card-tag tag-density">EXTREME MATTER</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>6 Billion Tons</h3>
+                        <p>Neutron stars are so dense that a single teaspoon of their degenerate matter weighs as much as Mt. Everest—packing an entire star's mass into a city-sized sphere.</p>
+                        <span class="card-meta">Density: 10^17 kg/m^3 | State: Degenerate Neutrons</span>
+                    </div>
+                </div>
+
+                <!-- Fact 4: CMB Light -->
+                <div class="mission-card" onclick="selectFactDirectly(3)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-cmb"></canvas>
+                        <span class="card-tag tag-cmb">ANCIENT LIGHT</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Big Bang Echo</h3>
+                        <p>The Cosmic Microwave Background is the oldest light in the cosmos, emitted 380,000 years after the Big Bang. It fills all space and causes static on old analog TVs.</p>
+                        <span class="card-meta">Emitted: 13.8 Billion Years Ago | Temperature: 2.725 Kelvin</span>
+                    </div>
+                </div>
+
+                <!-- Fact 5: Cosmic Calendar -->
+                <div class="mission-card" onclick="selectFactDirectly(4)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-calendar"></canvas>
+                        <span class="card-tag tag-calendar">COSMIC TIME</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Sagan's Calendar</h3>
+                        <p>If we compress the 13.8 billion-year age of the universe into a single 12-month calendar year, human history occupies only the final seconds of December 31st.</p>
+                        <span class="card-meta">1 Month = 1.15 Billion Years | Humans Emerge: Dec 31, 11:52 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cosmic Playground / Physics Lab Section -->
+    <section id="playground" class="section-padding simulator-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">INTERACTIVE ASTROPHYSICS MODELER</span>
+                <h2 class="glowing-heading">Physics Lab</h2>
+                <p>Select a cosmic fact card below to load its mathematical playground. Tweak physical factors and watch relative outputs recalculate in real time.</p>
+            </div>
+
+            <div class="simulator-wrapper">
+                <!-- Selectors Sidebar -->
+                <div class="selector-sidebar">
+                    <h3>SELECT PHYSICS FACT</h3>
+                    <div class="selector-list">
+                        <button class="selector-btn active" onclick="selectFact(0)">
+                            <i class="fa-solid fa-clock"></i> Time Dilation
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(1)">
+                            <i class="fa-solid fa-up-right-and-down-left-from-center"></i> Observable Scale
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(2)">
+                            <i class="fa-solid fa-weight-hanging"></i> Neutron Density
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(3)">
+                            <i class="fa-solid fa-tv"></i> Big Bang Static
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(4)">
+                            <i class="fa-solid fa-calendar-days"></i> Cosmic Calendar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Core Laboratory Viewport -->
+                <div class="simulator-main">
+                    <div class="simulator-header-ops">
+                        <div class="telemetry-online-tag">
+                            <span class="pulse-dot"></span>
+                            <span id="active-fact-title">TIME DILATION FIELD EQUATIONS</span>
+                        </div>
+                        <div class="hud-timer">SIM CLOCK SECS: <span id="ops-clock">000.00</span></div>
+                    </div>
+
+                    <div class="viewport-hud-layout">
+                        <!-- Canvas Screen Frame -->
+                        <div class="viewport-frame">
+                            <canvas id="fact-canvas"></canvas>
+                            <!-- High-Tech Target Crosshair Overlays -->
+                            <div class="viewport-overlay-corner top-left"></div>
+                            <div class="viewport-overlay-corner top-right"></div>
+                            <div class="viewport-overlay-corner bottom-left"></div>
+                            <div class="viewport-overlay-corner bottom-right"></div>
+                        </div>
+
+                        <!-- Parameter Tuning Controls Dashboard -->
+                        <div class="controls-card">
+                            <h3>CONTROLS & PARAMETERS</h3>
+                            
+                            <div id="dynamic-controls-container" class="sliders-list">
+                                <!-- Generated Dynamically in Javascript -->
+                            </div>
+
+                            <!-- Realtime HUD Calculations Deck -->
+                            <div class="hud-stats-box">
+                                <h4>MATHEMATICAL OUTPUTS (CALCULATED LIVE)</h4>
+                                <div class="hud-stats-grid" id="hud-readouts-container">
+                                    <!-- Populated Dynamically in JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Space Network Comms Linker Section (CMB Decoder) -->
+    <section id="comms-link" class="section-padding comms-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">COSMIC MICROWAVE DECRYPTER</span>
+                <h2 class="glowing-heading">Capture CMB Noise</h2>
+                <p>Tune into the oldest relic light of the universe. Align the DSN antenna parameters to the CMB frequency of 160.2 GHz to decrypt primordial logs.</p>
+            </div>
+
+            <div class="comms-box">
+                <!-- Dual Oscilloscope Screen Panel -->
+                <div class="oscilloscope-hud">
+                    <div class="oscilloscope-screen-box">
+                        <span class="oscilloscope-label">SIGNAL OBSERVATION VIEWPORT</span>
+                        <canvas id="dsn-canvas"></canvas>
+                        <div class="screen-glare"></div>
+                    </div>
+
+                    <!-- Alignment Locking Telemetry Panel -->
+                    <div class="tuning-lock-deck">
+                        <div class="lock-metric-box">
+                            <span class="metric-label">CMB DECAY WAVE LOCK</span>
+                            <div class="metric-value" id="lock-percent">0%</div>
+                        </div>
+                        <div class="alignment-bar-container">
+                            <div class="alignment-bar" id="lock-progress" style="width: 0%"></div>
+                        </div>
+                        <button id="comms-decrypt-btn" class="btn-lock" disabled>
+                            <i class="fa-solid fa-lock"></i> SIGNAL UNLOCKED
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Signal Dials Control Grid -->
+                <div class="dials-grid-panel">
+                    <h3>DSN COSMIC RECEIVER TUNER</h3>
+                    <p class="tuner-instruction">Match incoming cosmic wave (Cyan) with the targeted Big Bang relic signature (Magenta).</p>
+                    
+                    <div class="dials-controls">
+                        <!-- Frequency Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">CMB Carrier Freq</span>
+                                <span class="dial-value" id="dial-val-freq">60 GHz</span>
+                            </div>
+                            <input type="range" id="dial-freq" min="30" max="200" value="60" class="neon-slider">
+                        </div>
+
+                        <!-- Phase Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Phase Angle</span>
+                                <span class="dial-value" id="dial-val-phase">45°</span>
+                            </div>
+                            <input type="range" id="dial-phase" min="0" max="360" value="45" class="neon-slider">
+                        </div>
+
+                        <!-- Gain Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Gain Amp</span>
+                                <span class="dial-value" id="dial-val-gain">10 dB</span>
+                            </div>
+                            <input type="range" id="dial-gain" min="5" max="100" value="10" class="neon-slider">
+                        </div>
+
+                        <!-- Azimuth Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Atmospheric Filter Band</span>
+                                <span class="dial-value" id="dial-val-azimuth">30 GHz</span>
+                            </div>
+                            <input type="range" id="dial-azimuth" min="10" max="150" value="30" class="neon-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glowing Retro Scientific Decrypted Transcript Logs -->
+            <div class="terminal-deck-wrapper" id="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="t-dot red"></span>
+                        <span class="t-dot yellow"></span>
+                        <span class="t-dot green"></span>
+                    </div>
+                    <span class="terminal-title">COSMIC RELIC SPECTRUM ARCHIVE</span>
+                    <i class="fa-solid fa-satellite-dish terminal-status-icon"></i>
+                </div>
+                <div class="terminal-screen" id="decrypted-screen">
+                    <p class="term-dim">SYSTEM ONLINE // ANTENNAS CONNECTED // CMB CARRIER WAVE DISCONNECTED...</p>
+                    <p class="term-dim">> Adjust dials above to targeted mission resonance profile to lock and decipher cosmic background radiation...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Sliding Fact Manual / Study Drawer -->
+    <div id="student-drawer" class="student-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>COSMIC STUDY LAB</h2>
+            </div>
+            <button id="drawer-close" class="drawer-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-tabs">
+            <button id="tab-btn-science" class="drawer-tab-btn active" onclick="switchDrawerTab(0)">
+                <i class="fa-solid fa-flask"></i>
+                <span>Astrophysics</span>
+            </button>
+            <button id="tab-btn-code" class="drawer-tab-btn" onclick="switchDrawerTab(1)">
+                <i class="fa-solid fa-code"></i>
+                <span>Canvas Math</span>
+            </button>
+            <button id="tab-btn-inspector" class="drawer-tab-btn" onclick="switchDrawerTab(2)">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>State Debugger</span>
+            </button>
+        </div>
+
+        <div class="drawer-body">
+            <!-- Science Content Tab -->
+            <div id="drawer-tab-science" class="drawer-tab-content active">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- Canvas Code Breakdown Tab -->
+            <div id="drawer-tab-code" class="drawer-tab-content">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- State Debugger Live Inspection Tab -->
+            <div id="drawer-tab-inspector" class="drawer-tab-content">
+                <h3>🔍 Live Variable Inspector</h3>
+                <p>This console outputs dynamic variables within the global JavaScript <code>state</code> structure in real time as parameters shift.</p>
+                <div class="inspector-card">
+                    <h4>GLOBAL STATE CONSTANTS</h4>
+                    <pre id="inspect-state" class="inspector-json">Initializing feeds...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>COSMIC<span>FACTS</span></h2>
+                <p>An interactive, educational simulator detailing fundamental cosmic limits, spacetime physics, and relic Big Bang echoes for aspiring physics minds.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Cosmic Explorer</h4>
+                <a href="#origin"><i class="fa-solid fa-angle-right"></i> Explore Cards</a>
+                <a href="#playground"><i class="fa-solid fa-angle-right"></i> Physics Lab</a>
+                <a href="#comms-link"><i class="fa-solid fa-angle-right"></i> Relic Capture</a>
+            </div>
+            <div class="footer-links">
+                <h4>Cosmic Portals</h4>
+                <a href="universe.html"><i class="fa-solid fa-angles-right"></i> Universe Hub</a>
+                <a href="phenomana.html"><i class="fa-solid fa-angles-right"></i> Mysterious Phenomena</a>
+                <a href="missions.html"><i class="fa-solid fa-angles-right"></i> Space Missions</a>
+            </div>
+            <div class="footer-links">
+                <h4>System Portals</h4>
+                <a href="planets.html"><i class="fa-solid fa-angles-right"></i> Planets & Moons</a>
+                <a href="facts.html" class="active"><i class="fa-solid fa-angles-right"></i> Cosmic Facts</a>
+                <a href="discoveries.html"><i class="fa-solid fa-angles-right"></i> Latest Discoveries</a>
+            </div>
+            <div class="footer-meta">
+                <p>&copy; 2026 Cosmic Facts Operations Hub. Built for educational study. Spacetime coordinates locked.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script JS -->
+    <script src="facts.js"></script>
+</body>
+</html>

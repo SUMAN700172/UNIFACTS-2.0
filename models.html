@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Models - UniFacts</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Stars Canvas System -->
+    <canvas id="portal-background-canvas" class="portal-bg"></canvas>
+
+    <!-- Header Panel -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-satellite-dish logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <div class="header-actions">
+                <!-- Home Button -->
+                <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Hub</span>
+                </a>
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel" style="right: 0;">
+                        <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                        <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                        <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                        <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                        <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                        <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                        <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px; min-height: 80vh;">
+        <section class="container text-center section-padding">
+            <span class="badge animate-fade-in-up"><span class="pulse-dot"></span> 3D LAB</span>
+            <h1 class="hero-title animate-fade-in-up delay-100">Interactive <span>Models</span></h1>
+            <p class="section-subtitle animate-fade-in-up delay-200" style="margin-bottom: 3rem;">Manipulate gravitational forces, study star life cycles, and explore 3D renderings of the most extreme objects in the universe.</p>
+            
+            <div class="portal-grid">
+                <!-- Model Card 1 -->
+                <div class="portal-card animate-fade-in-up delay-100" style="--glow-color: #00f2fe; --glow-rgb: 0, 242, 254;">
+                    <div class="card-top" style="background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=600&auto=format&fit=crop') center/cover; opacity: 0.6;">
+                        <span class="card-badge">GRAVITY</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Black Hole Simulator</h3>
+                        <p>Adjust mass and spin to see how a black hole warps spacetime and bends light around its event horizon.</p>
+                        <div class="card-footer">
+                            <span class="card-stats">Status: Online</span>
+                            <a href="#" class="btn-glow primary-btn animate-pulse-glow" style="padding: 0.5rem 1rem;">Launch</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Model Card 2 -->
+                <div class="portal-card animate-fade-in-up delay-200" style="--glow-color: #f59e0b; --glow-rgb: 245, 158, 11;">
+                    <div class="card-top" style="background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop') center/cover; opacity: 0.6;">
+                        <span class="card-badge">STELLAR</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Solar System Builder</h3>
+                        <p>Create your own solar system, place planets in orbit, and balance the gravitational forces to achieve stable orbits.</p>
+                        <div class="card-footer">
+                            <span class="card-stats">Status: Online</span>
+                            <a href="#" class="btn-glow primary-btn animate-pulse-glow" style="padding: 0.5rem 1rem;">Launch</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Model Card 3 -->
+                <div class="portal-card animate-fade-in-up delay-300" style="--glow-color: #c084fc; --glow-rgb: 192, 132, 252;">
+                    <div class="card-top" style="background: url('https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=600&auto=format&fit=crop') center/cover; opacity: 0.6;">
+                        <span class="card-badge">QUANTUM</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Dark Matter Halo</h3>
+                        <p>Visualize the invisible framework of the cosmos and how dark matter influences the rotation of galaxies.</p>
+                        <div class="card-footer">
+                            <span class="card-stats">Status: Maintenance</span>
+                            <a href="#" class="btn-glow secondary-btn" style="padding: 0.5rem 1rem;">Offline</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-meta">
+            <p>&copy; 2026 UniFacts Space Observatory Center. Built for aerospace and physics research academy. All models aligned.</p>
+        </div>
+    </footer>
+    <script src="index.js"></script>
+</body>
+</html>

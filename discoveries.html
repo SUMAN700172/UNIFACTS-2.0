@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFacts: Latest Discoveries</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="discoveries.css">
+</head>
+<body>
+
+    <!-- Background Space Canvas System -->
+    <canvas id="universe-background" class="universe-bg"></canvas>
+
+    <!-- Global Glowing Header -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-satellite logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <nav class="nav-links">
+                <a href="#origin" class="active">Discoveries Cards</a>
+                <a href="#playground">Discovery Lab</a>
+                <a href="#comms-link">Telemetry Decoder</a>
+            </nav>
+            <div class="header-actions">
+                <!-- Home Button -->
+                <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Hub</span>
+                </a>
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container" style="margin-right: 12px;">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel">
+                        <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                        <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                        <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                        <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                        <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                        <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                        <a href="#" class="active"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                    </div>
+                </div>
+                <button id="student-toggle" class="btn-glow btn-student" title="Launch Science Deck">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Science Deck</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Origin Section -->
+    <section id="origin" class="section-padding origin-hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">ASTROPHYSICS RESEARCH HUB</span>
+                <h1 class="glitch-title" data-text="NEW HORIZONS">NEW HORIZONS</h1>
+                <p class="hero-subtitle">
+                    Explore active frontiers in observational cosmology. Model primordial galaxies from the dawn of time, EHT black hole polarization lines, exoplanet atmospheres, and gravitational wave hums.
+                </p>
+                <div class="hero-actions">
+                    <a href="#playground" class="btn-primary">
+                        <i class="fa-solid fa-microscope"></i> Launch Discovery Lab
+                    </a>
+                    <a href="#comms-link" class="btn-secondary">
+                        <i class="fa-solid fa-wave-square"></i> Tune Telemetry
+                    </a>
+                </div>
+            </div>
+
+            <!-- Discoveries Fact Cards Grid -->
+            <div class="mission-grid">
+                <!-- Discovery 1: JADES-GS-z14-0 -->
+                <div class="mission-card" onclick="selectFactDirectly(0)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-galaxy"></canvas>
+                        <span class="card-tag tag-galaxy">EARLY GALAXY</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>JWST: JADES-GS-z14-0</h3>
+                        <p>Webb has discovered the earliest known galaxy, existing just 290 million years after the Big Bang. Its extreme size and brightness defy standard cosmological structure models.</p>
+                        <span class="card-meta">Redshift: z = 14.32 | Age: 13.5 Billion Years Ago</span>
+                    </div>
+                </div>
+
+                <!-- Discovery 2: Sgr A* Magnetic Fields -->
+                <div class="mission-card" onclick="selectFactDirectly(1)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-eht"></canvas>
+                        <span class="card-tag tag-eht">BLACK HOLE</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>EHT: Sgr A* Polarization</h3>
+                        <p>The Event Horizon Telescope has captured the first polarized light image of the Milky Way's central black hole, Sgr A*, revealing powerful spiral magnetic fields.</p>
+                        <span class="card-meta">Instrument: EHT Interferometer | Feature: Polarized Accretion</span>
+                    </div>
+                </div>
+
+                <!-- Discovery 3: NANOGrav Gravitational Waves -->
+                <div class="mission-card" onclick="selectFactDirectly(2)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-waves"></canvas>
+                        <span class="card-tag tag-waves">SPACETIME HUM</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>NANOGrav: Cosmic Hum</h3>
+                        <p>Astronomers detected a low-frequency hum of gravitational waves rippling through spacetime, likely from supermassive black hole binaries merging across the universe.</p>
+                        <span class="card-meta">Frequency: Nanohertz | Method: Pulsar Timing Arrays</span>
+                    </div>
+                </div>
+
+                <!-- Discovery 4: Exoplanet Spectroscopy -->
+                <div class="mission-card" onclick="selectFactDirectly(3)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-exoplanet"></canvas>
+                        <span class="card-tag tag-exoplanet">ATMOSPHERE</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>JWST: LHS 475 b Transit</h3>
+                        <p>Webb completed high-precision transit spectroscopy of the rocky Earth-sized exoplanet LHS 475 b, charting molecular absorption features in its atmosphere.</p>
+                        <span class="card-meta">Planet: Rocky Earth-sized | Method: Transmission Spectra</span>
+                    </div>
+                </div>
+
+                <!-- Discovery 5: Euclid Space Telescope -->
+                <div class="mission-card" onclick="selectFactDirectly(4)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-euclid"></canvas>
+                        <span class="card-tag tag-euclid">COSMIC WEB</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Euclid: Cosmic Web Map</h3>
+                        <p>Euclid has captured wide-field images of billions of galaxies, tracing dark matter scaffolding and mapping the large-scale cosmic web structure across 10 billion years.</p>
+                        <span class="card-meta">Scope: 1/3 of Celestial Sky | Mapping Target: Dark Matter Gaps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="playground" class="section-padding simulator-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">INTERACTIVE ASTROPHYSICS LABORATORY</span>
+                <h2 class="glowing-heading">Discovery Lab</h2>
+                <p>Select a discovery card below to load its physics modeler. Tweak redshift, polarization angles, or wavelengths to watch outputs recalculate in real time.</p>
+            </div>
+
+            <div class="simulator-wrapper">
+                <!-- Selectors Sidebar -->
+                <div class="selector-sidebar">
+                    <h3>SELECT DISCOVERY FACT</h3>
+                    <div class="selector-list">
+                        <button class="selector-btn active" onclick="selectFact(0)">
+                            <i class="fa-solid fa-galaxy"></i> Primordial Galaxy
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(1)">
+                            <i class="fa-solid fa-circle-notch"></i> Polarized Sgr A*
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(2)">
+                            <i class="fa-solid fa-wave-sine"></i> Spacetime Hum
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(3)">
+                            <i class="fa-solid fa-chart-line"></i> Exoplanet Spectra
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(4)">
+                            <i class="fa-solid fa-network-wired"></i> Euclid Cosmic Web
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Core Laboratory Viewport -->
+                <div class="simulator-main">
+                    <div class="simulator-header-ops">
+                        <div class="telemetry-online-tag">
+                            <span class="pulse-dot"></span>
+                            <span id="active-fact-title">JWST PRIMORDIAL GALAXY REDSHIFT MODEL</span>
+                        </div>
+                        <div class="hud-timer">SIM CLOCK SECS: <span id="ops-clock">000.00</span></div>
+                    </div>
+
+                    <div class="viewport-hud-layout">
+                        <!-- Canvas Screen Frame -->
+                        <div class="viewport-frame">
+                            <canvas id="fact-canvas"></canvas>
+                            <!-- High-Tech Target Crosshair Overlays -->
+                            <div class="viewport-overlay-corner top-left"></div>
+                            <div class="viewport-overlay-corner top-right"></div>
+                            <div class="viewport-overlay-corner bottom-left"></div>
+                            <div class="viewport-overlay-corner bottom-right"></div>
+                        </div>
+
+                        <!-- Parameter Tuning Controls Dashboard -->
+                        <div class="controls-card">
+                            <h3>TUNING CONTROLS</h3>
+                            
+                            <div id="dynamic-controls-container" class="sliders-list">
+                                <!-- Generated Dynamically in Javascript -->
+                            </div>
+
+                            <!-- Realtime HUD Calculations Deck -->
+                            <div class="hud-stats-box">
+                                <h4>TELEMETRY OUTPUTS (CALCULATED LIVE)</h4>
+                                <div class="hud-stats-grid" id="hud-readouts-container">
+                                    <!-- Populated Dynamically in JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Space Network Comms Linker Section (Telemetry Decoder) -->
+    <section id="comms-link" class="section-padding comms-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">DEEP SPACE TELEMETRY CONSOLE</span>
+                <h2 class="glowing-heading">Telemetry Decoder</h2>
+                <p>Tune in to Ka-Band high-frequency transmissions from orbiting observatories. Match carrier resonance parameters to decrypt scientific datasets.</p>
+            </div>
+
+            <div class="comms-box">
+                <!-- Dual Oscilloscope Screen Panel -->
+                <div class="oscilloscope-hud">
+                    <div class="oscilloscope-screen-box">
+                        <span class="oscilloscope-label">DATA FREQUENCY OBSERVATION HUD</span>
+                        <canvas id="dsn-canvas"></canvas>
+                        <div class="screen-glare"></div>
+                    </div>
+
+                    <!-- Alignment Locking Telemetry Panel -->
+                    <div class="tuning-lock-deck">
+                        <div class="lock-metric-box">
+                            <span class="metric-label">CARRIER FREQ PHASE LOCK</span>
+                            <div class="metric-value" id="lock-percent">0%</div>
+                        </div>
+                        <div class="alignment-bar-container">
+                            <div class="alignment-bar" id="lock-progress" style="width: 0%"></div>
+                        </div>
+                        <button id="comms-decrypt-btn" class="btn-lock" disabled>
+                            <i class="fa-solid fa-lock"></i> SIGNAL UNLOCKED
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Signal Dials Control Grid -->
+                <div class="dials-grid-panel">
+                    <h3>DSN RECEIVER ALIGNMENT DECK</h3>
+                    <p class="tuner-instruction">Match incoming user wave (Cyan) with targeted observatory data link (Magenta).</p>
+                    
+                    <div class="dials-controls">
+                        <!-- Frequency Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Observatory Frequency</span>
+                                <span class="dial-value" id="dial-val-freq">10 GHz</span>
+                            </div>
+                            <input type="range" id="dial-freq" min="5" max="60" value="10" class="neon-slider">
+                        </div>
+
+                        <!-- Phase Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Phase Angle</span>
+                                <span class="dial-value" id="dial-val-phase">30°</span>
+                            </div>
+                            <input type="range" id="dial-phase" min="0" max="360" value="30" class="neon-slider">
+                        </div>
+
+                        <!-- Gain Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Receiver Gain Amplitude</span>
+                                <span class="dial-value" id="dial-val-gain">15 dB</span>
+                            </div>
+                            <input type="range" id="dial-gain" min="5" max="100" value="15" class="neon-slider">
+                        </div>
+
+                        <!-- Azimuth Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Atmospheric Tuning Filter</span>
+                                <span class="dial-value" id="dial-val-azimuth">10 GHz</span>
+                            </div>
+                            <input type="range" id="dial-azimuth" min="2" max="60" value="10" class="neon-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glowing Retro Scientific Decrypted Transcript Logs -->
+            <div class="terminal-deck-wrapper" id="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="t-dot red"></span>
+                        <span class="t-dot yellow"></span>
+                        <span class="t-dot green"></span>
+                    </div>
+                    <span class="terminal-title">TELESCOPE TELEMETRY DECRYPTION DECK</span>
+                    <i class="fa-solid fa-satellite-dish terminal-status-icon"></i>
+                </div>
+                <div class="terminal-screen" id="decrypted-screen">
+                    <p class="term-dim">SYSTEM ONLINE // ANTENNAS CONNECTED // OBSERVATORY LINK DISCONNECTED...</p>
+                    <p class="term-dim">> Align signal parameters above to lock targeted telescope carrier waves and decrypt datasets...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Sliding Manual / Study Drawer -->
+    <div id="student-drawer" class="student-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-user-astronaut"></i>
+                <h2>SCIENCE MANUAL</h2>
+            </div>
+            <button id="drawer-close" class="drawer-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-tabs">
+            <button id="tab-btn-science" class="drawer-tab-btn active" onclick="switchDrawerTab(0)">
+                <i class="fa-solid fa-book-atlas"></i>
+                <span>Cosmology & Math</span>
+            </button>
+            <button id="tab-btn-code" class="drawer-tab-btn" onclick="switchDrawerTab(1)">
+                <i class="fa-solid fa-code"></i>
+                <span>Canvas Math</span>
+            </button>
+            <button id="tab-btn-inspector" class="drawer-tab-btn" onclick="switchDrawerTab(2)">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>State Debugger</span>
+            </button>
+        </div>
+
+        <div class="drawer-body">
+            <!-- Science Content Tab -->
+            <div id="drawer-tab-science" class="drawer-tab-content active">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- Canvas Code Breakdown Tab -->
+            <div id="drawer-tab-code" class="drawer-tab-content">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- State Debugger Live Inspection Tab -->
+            <div id="drawer-tab-inspector" class="drawer-tab-content">
+                <h3>🔍 Telemetry Inspector</h3>
+                <p>This console outputs dynamic variables within the global JavaScript <code>state</code> structure in real time as sliders shift.</p>
+                <div class="inspector-card">
+                    <h4>GLOBAL STATE CONSTANTS</h4>
+                    <pre id="inspect-state" class="inspector-json">Initializing feeds...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>CELESTIAL<span>DISCOVERIES</span></h2>
+                <p>An interactive, educational simulator detailing cosmological redshifts, black hole event horizons, transmission spectrum transits, and gravitational wave hums.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Discovery Navigator</h4>
+                <a href="#origin"><i class="fa-solid fa-angle-right"></i> Explore Cards</a>
+                <a href="#playground"><i class="fa-solid fa-angle-right"></i> Discovery Lab</a>
+                <a href="#comms-link"><i class="fa-solid fa-angle-right"></i> Telemetry Decoder</a>
+            </div>
+            <div class="footer-links">
+                <h4>Cosmic Portals</h4>
+                <a href="universe.html"><i class="fa-solid fa-angles-right"></i> Universe Hub</a>
+                <a href="phenomana.html"><i class="fa-solid fa-angles-right"></i> Mysterious Phenomena</a>
+                <a href="missions.html"><i class="fa-solid fa-angles-right"></i> Space Missions</a>
+            </div>
+            <div class="footer-links">
+                <h4>System Portals</h4>
+                <a href="planets.html"><i class="fa-solid fa-angles-right"></i> Planets & Moons</a>
+                <a href="facts.html"><i class="fa-solid fa-angles-right"></i> Cosmic Facts</a>
+                <a href="discoveries.html" class="active"><i class="fa-solid fa-angles-right"></i> Latest Discoveries</a>
+            </div>
+            <div class="footer-meta">
+                <p>&copy; 2026 Celestial Discoveries Explorer. Built for astrophysics students. Transmissions locked.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script JS -->
+    <script src="discoveries.js"></script>
+</body>
+</html>

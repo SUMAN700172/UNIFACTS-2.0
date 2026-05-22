@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Insights - UniFacts</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .article-card {
+            background: rgba(8, 12, 24, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: left;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+        }
+        .article-card:hover {
+            border-color: var(--clr-planets);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
+        }
+        .article-meta {
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .article-title {
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .article-excerpt {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars Canvas System -->
+    <canvas id="portal-background-canvas" class="portal-bg"></canvas>
+
+    <!-- Header Panel -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-satellite-dish logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <div class="header-actions">
+                <!-- Home Button -->
+                <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Hub</span>
+                </a>
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel" style="right: 0;">
+                        <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                        <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                        <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                        <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                        <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                        <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                        <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px; min-height: 80vh;">
+        <section class="container section-padding">
+            <div class="text-center animate-fade-in-up">
+                <span class="badge"><span class="pulse-dot"></span> PUBLICATIONS</span>
+                <h1 class="hero-title">Expert <span>Insights</span></h1>
+                <p class="section-subtitle" style="margin-bottom: 3.5rem;">Read in-depth articles, analyses, and research summaries verified by astrophysics experts from our academy.</p>
+            </div>
+            
+            <div class="article-card animate-fade-in-up delay-100">
+                <div class="article-meta">MAY 21, 2026 // BY DR. ALENA STARK</div>
+                <h2 class="article-title">The Evolution of Exoplanet Atmospheres</h2>
+                <p class="article-excerpt">Recent data retrieved from the James Webb Space Telescope has provided unprecedented details regarding the atmospheric composition of K2-18b. Our analysis highlights the presence of carbon-bearing molecules and maps their potential implications for habitability...</p>
+                <a href="#" class="btn-glow primary-btn animate-pulse-glow" style="display: inline-block; padding: 0.6rem 1.5rem;">Read Full Paper <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+            
+            <div class="article-card animate-fade-in-up delay-200">
+                <div class="article-meta">APR 14, 2026 // BY PROF. MARCUS REID</div>
+                <h2 class="article-title">Mapping Dark Matter: A New Approach</h2>
+                <p class="article-excerpt">By analyzing gravitational lensing effects around ancient galaxy clusters, our team has developed a more accurate algorithm for predicting dark matter halos. This breakthrough could refine our understanding of galactic rotation curves...</p>
+                <a href="#" class="btn-glow primary-btn animate-pulse-glow" style="display: inline-block; padding: 0.6rem 1.5rem;">Read Full Paper <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-meta">
+            <p>&copy; 2026 UniFacts Space Observatory Center. Built for aerospace and physics research academy. All models aligned.</p>
+        </div>
+    </footer>
+    <script src="index.js"></script>
+</body>
+</html>

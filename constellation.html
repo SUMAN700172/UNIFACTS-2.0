@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COSMOS — Constellation Guide</title>
+  <script src="cimgs.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <style>
+    :root{
+      --bg:#07090f; --bg2:#0d1025; --bg3:#111530;
+      --cyan:#00e5ff; --purple:#b026ff; --orange:#ff5100; --gold:#ffd700; --green:#00ff88;
+      --glass:rgba(7,9,15,0.8); --border:rgba(255,255,255,0.07);
+      --text:#e8eaf6; --dim:rgba(232,234,246,0.42);
+      --fd:'Orbitron','Segoe UI',sans-serif;
+      --fb:'Space Grotesk','Segoe UI',sans-serif;
+      --fm:'Share Tech Mono','Courier New',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;overflow-x:hidden;}
+    body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.012) 2px,rgba(0,0,0,0.012) 4px);pointer-events:none;z-index:9999;}
+
+    /* ── HERO ── */
+    .hero{position:relative;text-align:center;padding:88px 24px 64px;overflow:hidden;}
+    .hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(0,229,255,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 35% at 15% 100%,rgba(176,38,255,0.05) 0%,transparent 60%),radial-gradient(ellipse 40% 35% at 85% 100%,rgba(255,81,0,0.04) 0%,transparent 60%);pointer-events:none;}
+    .hero-vline{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:72px;background:linear-gradient(to bottom,transparent,var(--cyan));opacity:.35;}
+    .stag{display:inline-block;font-family:var(--fd);font-size:.62rem;letter-spacing:4px;color:var(--dim);margin-bottom:16px;}
+    .htitle{font-family:var(--fd);font-size:clamp(2rem,5vw,3.8rem);font-weight:900;letter-spacing:4px;line-height:1.1;margin-bottom:16px;}
+    .ac{color:var(--cyan);filter:drop-shadow(0 0 14px rgba(0,229,255,.55));}
+    .ap{color:var(--purple);filter:drop-shadow(0 0 14px rgba(176,38,255,.55));}
+    .hsub{color:var(--dim);font-size:.95rem;max-width:520px;margin:0 auto 40px;line-height:1.75;}
+    .hpills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .hpill{display:flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:100px;font-family:var(--fm);font-size:.58rem;letter-spacing:2px;color:var(--dim);}
+    .hdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+    /* ── FILTER BAR ── */
+    .fbar{position:sticky;top:0;z-index:60;display:flex;justify-content:center;gap:7px;flex-wrap:wrap;padding:13px 24px;background:linear-gradient(to bottom,rgba(7,9,15,.98),rgba(7,9,15,.85));border-bottom:1px solid var(--border);backdrop-filter:blur(16px);}
+    .fbtn{padding:7px 18px;border-radius:100px;border:1px solid var(--border);background:transparent;font-family:var(--fm);font-size:.6rem;letter-spacing:2px;color:var(--dim);cursor:pointer;transition:all .2s;}
+    .fbtn:hover{border-color:rgba(0,229,255,.3);color:var(--text);}
+    .fbtn.on{background:rgba(0,229,255,.1);border-color:rgba(0,229,255,.4);color:var(--cyan);box-shadow:0 0 16px rgba(0,229,255,.08);}
+
+    /* ── GRID ── */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;padding:36px 40px 80px;max-width:1400px;margin:0 auto;}
+
+    /* ── CARD ── */
+    .card{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(22px);animation:cin .5s ease forwards;}
+    @keyframes cin{to{opacity:1;transform:translateY(0);}}
+    .card:hover{transform:translateY(-10px) scale(1.012);border-color:rgba(0,229,255,.22);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 40px rgba(0,229,255,.05);}
+    .card-accent{position:absolute;top:0;left:0;right:0;height:2px;z-index:4;}
+
+    /* photo + canvas overlay */
+    .card-vis{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;}
+    .card-vis img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:brightness(.8) saturate(1.15);}
+    .card:hover .card-vis img{transform:scale(1.07);filter:brightness(.95) saturate(1.2);}
+    /* canvas drawn ON TOP of the real photo */
+    .card-vis canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+    /* gradient fade bottom of photo */
+    .card-vis::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,var(--bg2) 0%,rgba(13,16,37,.55) 55%,transparent 100%);z-index:3;pointer-events:none;}
+    /* name overlay */
+    .card-oname{position:absolute;bottom:16px;left:18px;z-index:4;font-family:var(--fd);font-size:1.05rem;font-weight:900;letter-spacing:3px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.9);}
+    .card-olatin{position:absolute;bottom:2px;left:19px;z-index:4;font-family:var(--fm);font-size:.56rem;letter-spacing:2px;color:rgba(255,255,255,.5);}
+    .card-badge{position:absolute;top:12px;right:12px;z-index:4;font-family:var(--fm);font-size:.5rem;letter-spacing:2px;padding:4px 10px;border-radius:100px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.65);backdrop-filter:blur(6px);}
+
+    /* card body */
+    .card-body{padding:14px 18px 18px;}
+    .card-myth{font-size:.79rem;color:var(--dim);line-height:1.7;margin-bottom:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .card-stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:11px;}
+    .cs{padding:9px 0;text-align:center;border-right:1px solid var(--border);}
+    .cs:last-child{border-right:none;}
+    .csv{display:block;font-family:var(--fd);font-size:.8rem;font-weight:700;color:var(--cyan);}
+    .csk{display:block;font-size:.46rem;letter-spacing:1.5px;color:rgba(232,234,246,.28);text-transform:uppercase;margin-top:2px;}
+    .card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+    .ctag{font-family:var(--fm);font-size:.53rem;letter-spacing:1px;padding:3px 9px;border-radius:100px;background:rgba(176,38,255,.1);border:1px solid rgba(176,38,255,.2);color:#cc80ff;}
+
+    /* ── MODAL ── */
+    .mbg{position:fixed;inset:0;background:rgba(4,5,12,.95);backdrop-filter:blur(22px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .mbg.open{opacity:1;pointer-events:all;}
+    .modal{background:var(--bg2);border:1px solid rgba(0,229,255,.16);border-radius:24px;max-width:880px;width:100%;max-height:92vh;overflow-y:auto;transform:scale(.95) translateY(18px);transition:transform .38s cubic-bezier(.16,1,.3,1);scrollbar-width:thin;scrollbar-color:rgba(0,229,255,.18) transparent;position:relative;}
+    .mbg.open .modal{transform:scale(1) translateY(0);}
+    .modal-tline{position:absolute;top:0;left:0;right:0;height:2px;border-radius:24px 24px 0 0;}
+
+    /* modal photo with canvas overlay */
+    .mphoto{position:relative;width:100%;height:290px;overflow:hidden;border-radius:22px 22px 0 0;}
+    .mphoto img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(1.2);transition:transform 8s ease;}
+    .mbg.open .mphoto img{transform:scale(1.05);}
+    /* canvas ON TOP of modal photo */
+    .mphoto canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+    .mphoto-fade{position:absolute;inset:0;background:linear-gradient(to top,var(--bg2) 0%,rgba(13,16,37,.4) 50%,transparent 100%);z-index:3;}
+    .mphoto-title{position:absolute;bottom:26px;left:34px;z-index:4;}
+    .mname{font-family:var(--fd);font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;letter-spacing:4px;color:#fff;line-height:1;text-shadow:0 4px 20px rgba(0,0,0,.7);}
+    .mlatin{font-family:var(--fm);font-size:.65rem;letter-spacing:3px;color:rgba(255,255,255,.5);margin-top:6px;}
+    .mclose{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.5);color:rgba(255,255,255,.7);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;backdrop-filter:blur(6px);z-index:10;}
+    .mclose:hover{border-color:var(--cyan);color:var(--cyan);}
+
+    /* modal content */
+    .mcont{padding:26px 34px 34px;}
+    .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+    .ms{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:13px 10px;text-align:center;}
+    .msv{display:block;font-family:var(--fd);font-size:.95rem;font-weight:700;color:var(--cyan);margin-bottom:3px;}
+    .msk{font-size:.5rem;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;}
+    .msec{font-family:var(--fd);font-size:.53rem;letter-spacing:3px;color:var(--cyan);margin-bottom:13px;display:flex;align-items:center;gap:12px;}
+    .msec::after{content:'';flex:1;height:1px;background:rgba(0,229,255,.12);}
+    .mmyth{font-size:.87rem;color:rgba(232,234,246,.62);line-height:1.9;border-left:2px solid var(--purple);padding-left:15px;font-style:italic;margin-bottom:24px;}
+    .mfacts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;}
+    .mf{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:13px 15px;}
+    .mfk{display:block;font-family:var(--fd);font-size:.54rem;letter-spacing:2px;color:var(--cyan);margin-bottom:5px;}
+    .mfv{font-size:.79rem;color:var(--dim);line-height:1.6;}
+    .mcredit{font-family:var(--fm);font-size:.48rem;letter-spacing:1.5px;color:rgba(232,234,246,.18);text-align:center;border-top:1px solid var(--border);padding-top:14px;}
+
+    /* responsive */
+    @media(max-width:900px){.grid{padding:24px 16px 60px;grid-template-columns:1fr 1fr;}.mgrid{grid-template-columns:1fr 1fr;}.mfacts{grid-template-columns:1fr;}.mcont{padding:18px 20px 26px;}}
+    @media(max-width:600px){.grid{grid-template-columns:1fr;}.mphoto{height:210px;}.htitle{font-size:2rem;}}
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-vline"></div>
+  <div class="stag">06 — STAR PATTERNS</div>
+  <h1 class="htitle">The <span class="ac">Constellation</span><br><span class="ap">Guide</span></h1>
+  <p class="hsub">Real astrophotography of the night sky's most iconic star patterns, with constellation lines drawn over the actual stars. Click any card to explore mythology and cosmic secrets.</p>
+  <div class="hpills">
+    <div class="hpill"><div class="hdot" style="background:var(--cyan)"></div>16 CONSTELLATIONS</div>
+    <div class="hpill"><div class="hdot" style="background:var(--purple)"></div>NOIRLAB REAL PHOTOS</div>
+    <div class="hpill"><div class="hdot" style="background:var(--gold)"></div>LINES DRAWN ON STARS</div>
+    <div class="hpill"><div class="hdot" style="background:var(--green)"></div>100% OFFLINE</div>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="fbar">
+  <button class="fbtn on" data-f="all">ALL (16)</button>
+  <button class="fbtn" data-f="zodiac">ZODIAC</button>
+  <button class="fbtn" data-f="northern">NORTHERN</button>
+  <button class="fbtn" data-f="southern">SOUTHERN</button>
+  <button class="fbtn" data-f="summer">SUMMER</button>
+  <button class="fbtn" data-f="winter">WINTER</button>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid"></div>
+
+<!-- MODAL -->
+<div class="mbg" id="mbg">
+  <div class="modal">
+    <div class="modal-tline" id="m-tline"></div>
+    <div class="mphoto">
+      <img id="m-img" src="" alt=""/>
+      <canvas id="m-canvas"></canvas>
+      <div class="mphoto-fade"></div>
+      <div class="mphoto-title">
+        <div class="mname"  id="m-name"></div>
+        <div class="mlatin" id="m-latin"></div>
+      </div>
+      <button class="mclose" id="mclose">✕</button>
+    </div>
+    <div class="mcont">
+      <div class="mgrid">
+        <div class="ms"><span class="msv" id="m-stars">—</span><span class="msk">Main Stars</span></div>
+        <div class="ms"><span class="msv" id="m-area">—</span><span class="msk">Area °²</span></div>
+        <div class="ms"><span class="msv" id="m-quad">—</span><span class="msk">Quadrant</span></div>
+        <div class="ms"><span class="msv" id="m-best">—</span><span class="msk">Best Month</span></div>
+      </div>
+      <div class="msec">MYTHOLOGY</div>
+      <div class="mmyth" id="m-myth"></div>
+      <div class="msec">KEY FACTS</div>
+      <div class="mfacts" id="m-facts"></div>
+      <div class="mcredit">PHOTO CREDIT: NOIRLAB / NSF / AURA / E. SLAWIK — FREE FOR EDUCATIONAL USE (CC BY 4.0)</div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ============================================================
+// DATA — real star positions (x,y) 0-1 within card frame
+// lines = pairs of indices to connect with glowing lines
+// ============================================================
+var DATA = [
+  {
+    name:'Orion', latin:'The Hunter', img:'orion',
+    color:'#00e5ff', filter:['northern','winter'],
+    // Stars placed to match real photo positions
+    stars:[[.38,.22],[.61,.22],[.39,.50],[.50,.50],[.61,.50],[.38,.76],[.62,.76],[.50,.12]],
+    lines:[[0,2],[1,4],[2,3],[3,4],[0,7],[1,7],[2,5],[4,6]],
+    mainStars:7, area:594, quad:'NQ1', best:'January',
+    myth:'Orion was the greatest hunter in Greek mythology — son of Poseidon. His three perfectly aligned belt stars have guided sailors for thousands of years. Zeus placed him in the sky after his death, forever chasing the Pleiades across the heavens.',
+    facts:[
+      {k:'RIGEL',        v:'Blue supergiant 120,000× brighter than the Sun — 860 light-years away'},
+      {k:'BETELGEUSE',   v:'Red supergiant so enormous it would engulf Jupiter\'s entire orbit'},
+      {k:'ORION NEBULA', v:'Stellar nursery M42 — a glowing cloud visible to the naked eye below the belt'},
+      {k:'BELT STARS',   v:'Alnitak, Alnilam, Mintaka — three massive blue stars perfectly aligned over 3°'}
+    ]
+  },
+  {
+    name:'Ursa Major', latin:'The Great Bear', img:'ursa_major',
+    color:'#b026ff', filter:['northern'],
+    stars:[[.20,.42],[.30,.47],[.40,.40],[.33,.30],[.22,.25],[.13,.19],[.07,.14]],
+    lines:[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]],
+    mainStars:7, area:1280, quad:'NQ2', best:'April',
+    myth:'Zeus transformed beautiful Callisto into a bear to hide her from Hera\'s rage. Her son Arcas nearly hunted her before Zeus immortalised them both in the sky. The Big Dipper is humanity\'s most recognised star pattern, used for navigation for millennia.',
+    facts:[
+      {k:'POINTER STARS',  v:'Dubhe and Merak point directly to Polaris — the North Star'},
+      {k:'MIZAR & ALCOR',  v:'Famous naked-eye double star — one of the first ever studied by astronomers'},
+      {k:'CIRCUMPOLAR',    v:'Never sets below the horizon from latitudes above 41°N — always visible'},
+      {k:'3RD LARGEST',    v:'Covers 1,280 square degrees — third largest of all 88 constellations'}
+    ]
+  },
+  {
+    name:'Scorpius', latin:'The Scorpion', img:'scorpius',
+    color:'#ff5100', filter:['southern','summer','zodiac'],
+    stars:[[.50,.22],[.37,.30],[.62,.28],[.46,.38],[.50,.46],[.50,.55],[.44,.64],[.50,.73],[.57,.73],[.60,.64]],
+    lines:[[1,0],[0,2],[0,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,5]],
+    mainStars:18, area:497, quad:'SQ4', best:'July',
+    myth:'Gaia sent this scorpion to slay Orion. Zeus placed both on opposite sides of the sky so they\'d never meet — Scorpius rises as Orion sets. Its heart is Antares, a red supergiant 700 times the size of our Sun.',
+    facts:[
+      {k:'ANTARES',       v:'Red supergiant meaning "rival of Mars" — so red it rivals the planet in colour'},
+      {k:'GALACTIC CORE', v:'Looking at Scorpius points toward the very centre of our Milky Way galaxy'},
+      {k:'SHAULA',        v:'The stinger — one of the brightest stars in the entire southern sky'},
+      {k:'GLOBULARS',     v:'Contains magnificent globular clusters M4 and M80 — millions of ancient stars'}
+    ]
+  },
+  {
+    name:'Cassiopeia', latin:'The Queen', img:'cassiopeia',
+    color:'#00e5ff', filter:['northern'],
+    stars:[[.14,.55],[.28,.34],[.50,.44],[.70,.30],[.85,.50]],
+    lines:[[0,1],[1,2],[2,3],[3,4]],
+    mainStars:5, area:598, quad:'NQ1', best:'November',
+    myth:'Queen Cassiopeia boasted she surpassed the sea nymphs in beauty. Poseidon chained her throne near the celestial pole — she endlessly circles the sky, sometimes hanging upside down in humiliation for her vanity.',
+    facts:[
+      {k:'W SHAPE',       v:'The iconic W or M silhouette — one of the most recognisable patterns in the night sky'},
+      {k:'CIRCUMPOLAR',   v:'Never sets below the horizon from northern latitudes — a year-round companion'},
+      {k:'TYCHO\'S STAR', v:'A supernova blazed here in 1572 — so bright Tycho Brahe saw it in broad daylight'},
+      {k:'SCHEDAR',       v:'The brightest star — an orange giant 228 light-years from Earth'}
+    ]
+  },
+  {
+    name:'Leo', latin:'The Lion', img:'leo',
+    color:'#ffd700', filter:['northern','zodiac'],
+    stars:[[.50,.72],[.43,.62],[.33,.48],[.27,.34],[.28,.24],[.41,.26],[.63,.68],[.74,.62],[.85,.65]],
+    lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,2],[1,6],[6,7],[7,8]],
+    mainStars:9, area:947, quad:'NQ2', best:'April',
+    myth:'Leo is the Nemean Lion, slain by Hercules as his first of twelve labours. The hide was impervious to all weapons, so Hercules strangled it bare-handed. Zeus honoured the beast by placing it among the stars forever.',
+    facts:[
+      {k:'REGULUS',       v:'Blue-white star spinning so fast it bulges at its equator — completes one turn in 15 hours'},
+      {k:'THE SICKLE',    v:'Six stars form a backwards question mark — the lion\'s iconic mane and head'},
+      {k:'LEONIDS',       v:'The November Leonid meteor shower radiates from Leo — can peak at 1,000+ per hour'},
+      {k:'LEO TRIPLET',   v:'Three interacting galaxies — M65, M66, NGC 3628 — all visible in a telescope'}
+    ]
+  },
+  {
+    name:'Cygnus', latin:'The Swan', img:'cygnus',
+    color:'#ffffff', filter:['northern','summer'],
+    stars:[[.50,.16],[.50,.44],[.50,.76],[.22,.44],[.78,.44]],
+    lines:[[0,1],[1,2],[3,1],[1,4]],
+    mainStars:9, area:804, quad:'NQ4', best:'September',
+    myth:'Zeus disguised himself as a swan to approach Leda, Queen of Sparta. Their union produced Helen of Troy. The swan flies along the Milky Way — its cross shape giving it the name Northern Cross, blazing across summer skies.',
+    facts:[
+      {k:'DENEB',          v:'One of the most luminous stars known — 200,000× brighter than our Sun'},
+      {k:'ALBIREO',        v:'Stunning double star — one gold, one sapphire blue — a telescope showpiece'},
+      {k:'CYGNUS X-1',     v:'Contains one of the first black holes ever confirmed, discovered in 1964'},
+      {k:'SUMMER TRIANGLE',v:'Deneb forms one corner of the Summer Triangle with Vega and Altair'}
+    ]
+  },
+  {
+    name:'Gemini', latin:'The Twins', img:'gemini',
+    color:'#00e5ff', filter:['northern','winter','zodiac'],
+    stars:[[.28,.16],[.56,.16],[.26,.33],[.53,.33],[.24,.52],[.51,.52],[.22,.70],[.49,.70]],
+    lines:[[0,1],[0,2],[1,3],[2,3],[2,4],[3,5],[4,6],[5,7],[6,7]],
+    mainStars:17, area:514, quad:'NQ2', best:'February',
+    myth:'Castor and Pollux — twin brothers, one mortal one immortal. When Castor died, Pollux begged Zeus to share his immortality. Zeus placed them side by side in the sky so the inseparable twins would never be apart for eternity.',
+    facts:[
+      {k:'POLLUX',    v:'The closer twin at 34 light-years — has a confirmed orbiting exoplanet, Pollux b'},
+      {k:'CASTOR',    v:'Actually a sextuple star system — six stars all gravitationally bound together'},
+      {k:'GEMINIDS',  v:'The December Geminid shower — the year\'s most reliable with up to 120 meteors/hour'},
+      {k:'ZODIAC',    v:'The Sun passes through Gemini from June 21 to July 20 each year'}
+    ]
+  },
+  {
+    name:'Perseus', latin:'The Hero', img:'perseus',
+    color:'#b026ff', filter:['northern','winter'],
+    stars:[[.50,.26],[.37,.36],[.63,.34],[.42,.48],[.60,.50],[.37,.62],[.60,.64]],
+    lines:[[0,1],[0,2],[1,3],[2,4],[3,4],[3,5],[4,6]],
+    mainStars:19, area:615, quad:'NQ1', best:'December',
+    myth:'Perseus slew Medusa and rescued Andromeda from the sea monster Cetus. He carries Medusa\'s head — represented by Algol, the "Demon Star," which dims eerily every 2.87 days as a companion eclipses it.',
+    facts:[
+      {k:'ALGOL',          v:'The Demon Star — an eclipsing binary that dims visibly every 2.87 days'},
+      {k:'MIRFAK',         v:'The brightest star — a yellow supergiant 510 light-years from Earth'},
+      {k:'DOUBLE CLUSTER', v:'NGC 869 & 884 — two dazzling open clusters visible to the naked eye side by side'},
+      {k:'PERSEIDS',       v:'August\'s famous meteor shower delivers up to 100 shooting stars per hour'}
+    ]
+  },
+  {
+    name:'Lyra', latin:'The Lyre', img:'lyra',
+    color:'#00e5ff', filter:['northern','summer'],
+    stars:[[.50,.20],[.36,.44],[.64,.44],[.36,.66],[.64,.66]],
+    lines:[[0,1],[0,2],[1,2],[1,3],[2,4],[3,4]],
+    mainStars:5, area:286, quad:'NQ4', best:'August',
+    myth:'The magical lyre of Orpheus, whose music could charm rocks, rivers and death itself. When Orpheus died, Zeus placed his lyre in the sky. Vega, its brightest star, will become Earth\'s pole star in 12,000 years.',
+    facts:[
+      {k:'VEGA',           v:'5th brightest star overall — a blue-white jewel just 25 light-years from Earth'},
+      {k:'FUTURE POLE STAR',v:'Earth\'s axial wobble means Vega will replace Polaris as pole star by year 14,000'},
+      {k:'RING NEBULA',    v:'M57 — a glowing shell of gas from a dying star, visible in a small telescope'},
+      {k:'LYRIDS',         v:'The annual Lyrid meteor shower peaks around April 22nd each year'}
+    ]
+  },
+  {
+    name:'Virgo', latin:'The Maiden', img:'virgo',
+    color:'#b026ff', filter:['northern','zodiac'],
+    stars:[[.50,.74],[.37,.58],[.28,.44],[.44,.33],[.60,.30],[.72,.40],[.62,.52]],
+    lines:[[0,1],[1,2],[1,3],[3,4],[4,5],[5,6],[6,1]],
+    mainStars:15, area:1294, quad:'SQ3', best:'May',
+    myth:'Virgo represents Demeter, goddess of the harvest. When her daughter Persephone descended to the underworld, Demeter\'s grief brought winter. She holds a sheaf of wheat — symbolised by the brilliant star Spica.',
+    facts:[
+      {k:'SPICA',         v:'Blue-white binary 250 light-years away — 12,100× more luminous than our Sun'},
+      {k:'LARGEST ZODIAC',v:'The 2nd largest constellation — spanning 1,294 square degrees of sky'},
+      {k:'VIRGO CLUSTER', v:'Contains 1,300+ galaxies — the nearest major galaxy cluster to us at 65 million ly'},
+      {k:'ECLIPTIC',      v:'The Sun spends more time in Virgo than any other zodiac constellation'}
+    ]
+  },
+  {
+    name:'Boötes', latin:'The Herdsman', img:'bootes',
+    color:'#ffd700', filter:['northern'],
+    stars:[[.50,.74],[.34,.58],[.66,.56],[.28,.42],[.70,.40],[.38,.26],[.62,.24],[.50,.16]],
+    lines:[[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6,7],[5,6]],
+    mainStars:15, area:907, quad:'NQ3', best:'June',
+    myth:'The son of Zeus and Callisto, Boötes eternally herds the great bears around the celestial pole. His brilliant star Arcturus is the brightest star in the northern hemisphere — so close it will visibly shift across our sky within centuries.',
+    facts:[
+      {k:'ARCTURUS',       v:'4th brightest star overall — an orange giant just 36.7 light-years from Earth'},
+      {k:'ARC TO ARCTURUS',v:'Follow the arc of the Big Dipper\'s handle — it leads straight to Arcturus'},
+      {k:'ANCIENT STAR',   v:'Arcturus is 7 billion years old — nearly twice the age of our own Sun'},
+      {k:'FAST MOVER',     v:'Moving through space at 122 km/s — far faster than most nearby stars'}
+    ]
+  },
+  {
+    name:'Aquila', latin:'The Eagle', img:'aquila',
+    color:'#ffd700', filter:['northern','summer'],
+    stars:[[.50,.28],[.34,.38],[.66,.36],[.50,.46],[.50,.62]],
+    lines:[[1,0],[0,2],[0,3],[3,4]],
+    mainStars:10, area:652, quad:'NQ4', best:'August',
+    myth:'Zeus\'s sacred eagle, carrier of his thunderbolts across Olympus. It was also the eagle that abducted the beautiful shepherd Ganymede and carried him to the heavens to serve as cupbearer to the gods for eternity.',
+    facts:[
+      {k:'ALTAIR',         v:'Only 17 light-years away — one of the closest naked-eye stars to Earth'},
+      {k:'FAST SPINNER',   v:'Altair rotates in just 9 hours — so fast it visibly flattens into an oblate shape'},
+      {k:'SUMMER TRIANGLE',v:'Altair forms one corner of the Summer Triangle with Vega and Deneb'},
+      {k:'MILKY WAY',      v:'Flies directly along the Milky Way band — richest region of star clouds'}
+    ]
+  },
+  {
+    name:'Andromeda', latin:'The Chained Princess', img:'andromeda',
+    color:'#b026ff', filter:['northern'],
+    stars:[[.50,.28],[.33,.40],[.67,.38],[.20,.52],[.80,.50],[.12,.65],[.88,.62]],
+    lines:[[0,1],[0,2],[1,3],[2,4],[3,5],[4,6]],
+    mainStars:16, area:722, quad:'NQ1', best:'November',
+    myth:'Princess Andromeda was chained to a cliff as sacrifice to the monster Cetus. Perseus slew the beast and freed her. Within this constellation lies the Andromeda Galaxy — our nearest galactic neighbour, visible to the naked eye.',
+    facts:[
+      {k:'ANDROMEDA GALAXY',v:'M31 — 2.537 million light-years away, the farthest object visible without a telescope'},
+      {k:'COLLISION',       v:'The Milky Way and Andromeda will collide and merge in about 4.5 billion years'},
+      {k:'SIZE IN SKY',     v:'The Andromeda Galaxy spans 6× the diameter of the full Moon across the sky'},
+      {k:'ALPHERATZ',       v:'Shared with Pegasus\'s Great Square — one of autumn\'s brightest guideposts'}
+    ]
+  },
+  {
+    name:'Taurus', latin:'The Bull', img:'taurus',
+    color:'#ff5100', filter:['northern','winter','zodiac'],
+    stars:[[.50,.52],[.35,.40],[.24,.30],[.65,.37],[.76,.27],[.42,.27],[.58,.25],[.18,.18]],
+    lines:[[0,1],[1,2],[0,3],[3,4],[0,5],[0,6],[1,5],[1,7]],
+    mainStars:19, area:797, quad:'NQ1', best:'January',
+    myth:'Zeus became a magnificent white bull to enchant Princess Europa, who climbed on its back and was carried to Crete. Taurus also hosts the Pleiades — the Seven Sisters — beloved and named by cultures on every inhabited continent.',
+    facts:[
+      {k:'ALDEBARAN',  v:'Red giant marking the bull\'s fiery eye — 65 light-years from Earth'},
+      {k:'PLEIADES',   v:'The famous Seven Sisters open cluster — used for navigation and calendars for millennia'},
+      {k:'HYADES',     v:'The nearest open cluster to Earth at 153 light-years — forms the bull\'s V-shaped face'},
+      {k:'CRAB NEBULA',v:'Supernova remnant M1 — witnessed by Chinese and Arab astronomers in 1054 AD'}
+    ]
+  },
+  {
+    name:'Sagittarius', latin:'The Archer', img:'sagittarius',
+    color:'#ffd700', filter:['southern','summer','zodiac'],
+    stars:[[.50,.28],[.35,.36],[.65,.34],[.26,.48],[.74,.46],[.33,.60],[.67,.58],[.40,.72],[.60,.70]],
+    lines:[[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6,8],[7,8],[5,6]],
+    mainStars:22, area:867, quad:'SQ4', best:'August',
+    myth:'The centaur archer points his bow at Scorpius. This direction holds the richest star fields in the sky — we are looking directly toward the heart of the Milky Way, where a supermassive black hole four million times the mass of our Sun lurks.',
+    facts:[
+      {k:'GALACTIC CENTRE', v:'Pointing at Sagittarius means looking toward the Milky Way\'s very core'},
+      {k:'SAGITTARIUS A*',  v:'A 4-million solar mass black hole confirmed at our galaxy\'s centre'},
+      {k:'TEAPOT',          v:'Eight stars form a teapot — the Milky Way appears as steam rising from the spout'},
+      {k:'MESSIER OBJECTS', v:'Contains more Messier deep-sky objects than any other constellation in the sky'}
+    ]
+  },
+  {
+    name:'Canis Major', latin:'The Greater Dog', img:'canis_major',
+    color:'#00e5ff', filter:['southern','winter'],
+    stars:[[.50,.20],[.38,.36],[.62,.34],[.35,.52],[.65,.50],[.40,.68],[.60,.72]],
+    lines:[[0,1],[0,2],[1,2],[1,3],[2,4],[3,5],[4,6],[5,6]],
+    mainStars:8, area:380, quad:'SQ1', best:'February',
+    myth:'One of Orion\'s faithful hunting dogs, following its master across the winter sky forever. Contains Sirius — the brightest star in the entire night sky. Ancient Egyptians called it the Dog Star and used its rising to predict the flooding of the Nile.',
+    facts:[
+      {k:'SIRIUS',    v:'Brightest star in the night sky at magnitude -1.46 — a dazzling blue-white gem'},
+      {k:'DISTANCE',  v:'Sirius is just 8.6 light-years away — one of our closest stellar neighbours'},
+      {k:'SIRIUS B',  v:'A white dwarf companion — a dead star the size of Earth but as massive as the Sun'},
+      {k:'DOG DAYS',  v:'The "dog days of summer" come from Sirius rising with the Sun in July and August'}
+    ]
+  }
+];
+
+// ============================================================
+// DRAW constellation lines + stars ON TOP of a photo
+// el = canvas element, c = constellation data, photo = img element
+// ============================================================
+function drawOverlay(canvas, c, imgEl) {
+  var W = canvas.width  = canvas.offsetWidth  || imgEl.offsetWidth  || 350;
+  var H = canvas.height = canvas.offsetHeight || imgEl.offsetHeight || 260;
+  var ctx = canvas.getContext('2d');
+  var col  = c.color || '#00e5ff';
+  var pad  = 0.12;
+
+  ctx.clearRect(0, 0, W, H);
+
+  function px(x) { return pad * W + x * W * (1 - pad * 2); }
+  function py(y) { return pad * H + y * H * (1 - pad * 2); }
+
+  // Draw lines
+  ctx.shadowColor = col;
+  ctx.shadowBlur  = 10;
+  ctx.strokeStyle = col;
+  ctx.lineWidth   = 1.4;
+  ctx.globalAlpha = 0.65;
+  c.lines.forEach(function(pair) {
+    var a = c.stars[pair[0]], b = c.stars[pair[1]];
+    ctx.beginPath();
+    ctx.moveTo(px(a[0]), py(a[1]));
+    ctx.lineTo(px(b[0]), py(b[1]));
+    ctx.stroke();
+  });
+
+  // Draw star dots
+  ctx.globalAlpha = 1;
+  c.stars.forEach(function(s, i) {
+    var x = px(s[0]), y = py(s[1]);
+    var r = i === 0 ? 4 : 2.5;
+
+    // Soft glow halo
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r * 5);
+    g.addColorStop(0, col + '55');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x, y, r * 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // White star dot
+    ctx.shadowColor = col;
+    ctx.shadowBlur  = 14;
+    ctx.fillStyle   = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // Name label above brightest star
+  var s0 = c.stars[0];
+  ctx.shadowColor = col;
+  ctx.shadowBlur  = 12;
+  ctx.fillStyle   = col;
+  ctx.font        = '700 11px Orbitron, Arial, sans-serif';
+  ctx.globalAlpha = 0.9;
+  ctx.fillText(c.name.toUpperCase(), px(s0[0]) + 8, py(s0[1]) - 10);
+
+  ctx.shadowBlur  = 0;
+  ctx.globalAlpha = 1;
+}
+
+// ============================================================
+// BUILD GRID
+// ============================================================
+function buildGrid(filter) {
+  var grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  var list = filter === 'all' ? DATA
+    : DATA.filter(function(d){ return d.filter.indexOf(filter) !== -1; });
+
+  list.forEach(function(c, i) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.style.animationDelay = (i * 0.055) + 's';
+    card.innerHTML =
+      '<div class="card-accent" style="background:linear-gradient(90deg,' + c.color + ',transparent)"></div>' +
+      '<div class="card-vis">' +
+        '<img src="' + CIMGS[c.img] + '" alt="' + c.name + '"/>' +
+        '<canvas></canvas>' +
+        '<div class="card-badge">' + c.best.slice(0,3).toUpperCase() + '</div>' +
+        '<div class="card-oname">' + c.name.toUpperCase() + '</div>' +
+        '<div class="card-olatin">' + c.latin + '</div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-myth">' + c.myth + '</div>' +
+        '<div class="card-stats">' +
+          '<div class="cs"><span class="csv">' + c.mainStars + '</span><span class="csk">Stars</span></div>' +
+          '<div class="cs"><span class="csv">' + c.area + '</span><span class="csk">Area °²</span></div>' +
+          '<div class="cs"><span class="csv">' + c.quad + '</span><span class="csk">Quad</span></div>' +
+        '</div>' +
+        '<div class="card-tags">' +
+          c.filter.map(function(f){ return '<span class="ctag">' + f.toUpperCase() + '</span>'; }).join('') +
+        '</div>' +
+      '</div>';
+
+    // Draw constellation lines on canvas once image loads
+    var imgEl    = card.querySelector('img');
+    var cvEl     = card.querySelector('canvas');
+    imgEl.onload = function() { drawOverlay(cvEl, c, imgEl); };
+    if (imgEl.complete) drawOverlay(cvEl, c, imgEl);
+
+    card.addEventListener('click', function(){ openModal(c); });
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// FILTER BUTTONS
+// ============================================================
+document.querySelectorAll('.fbtn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.fbtn').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on');
+    buildGrid(btn.dataset.f);
+  });
+});
+
+// ============================================================
+// MODAL
+// ============================================================
+var currentC = null;
+
+function openModal(c) {
+  currentC = c;
+
+  document.getElementById('m-tline').style.background  = 'linear-gradient(90deg,' + c.color + ',transparent)';
+  document.getElementById('m-img').src                 = CIMGS[c.img];
+  document.getElementById('m-name').textContent        = c.name;
+  document.getElementById('m-latin').textContent       = c.latin;
+  document.getElementById('m-stars').textContent       = c.mainStars;
+  document.getElementById('m-area').textContent        = c.area + '°²';
+  document.getElementById('m-quad').textContent        = c.quad;
+  document.getElementById('m-best').textContent        = c.best;
+  document.getElementById('m-myth').textContent        = c.myth;
+
+  // Facts
+  document.getElementById('m-facts').innerHTML = c.facts.map(function(f) {
+    return '<div class="mf"><span class="mfk">' + f.k + '</span><span class="mfv">' + f.v + '</span></div>';
+  }).join('');
+
+  // Draw on modal canvas once image loads
+  var mImg = document.getElementById('m-img');
+  var mCv  = document.getElementById('m-canvas');
+  mImg.onload = function() {
+    requestAnimationFrame(function() { drawOverlay(mCv, c, mImg); });
+  };
+  if (mImg.complete) requestAnimationFrame(function() { drawOverlay(mCv, c, mImg); });
+
+  document.getElementById('mbg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('mbg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('mclose').addEventListener('click', closeModal);
+document.getElementById('mbg').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+// Redraw canvases on resize
+window.addEventListener('resize', function() {
+  document.querySelectorAll('.card-vis').forEach(function(vis, i) {
+    var img = vis.querySelector('img');
+    var cv  = vis.querySelector('canvas');
+    var d   = DATA[i]; // rough match — fine for resize
+    if (img && cv && img.complete) drawOverlay(cv, d, img);
+  });
+  if (currentC) {
+    var mImg = document.getElementById('m-img');
+    var mCv  = document.getElementById('m-canvas');
+    if (mImg.complete) drawOverlay(mCv, currentC, mImg);
+  }
+});
+
+// ── START ──
+buildGrid('all');
+</script>
+</body>
+</html>

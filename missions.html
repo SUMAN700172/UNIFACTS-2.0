@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFacts: Cosmic Space Missions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="missions.css">
+</head>
+<body>
+
+    <!-- Background Space Canvas System -->
+    <canvas id="universe-background" class="universe-bg"></canvas>
+
+    <!-- Global Glowing Header -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shuttle-space logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <nav class="nav-links">
+                <a href="#origin" class="active">Fleet Origin</a>
+                <a href="#simulator">Operations Lab</a>
+                <a href="#comms-link">DSN Decoder</a>
+            </nav>
+            <div class="header-actions">
+                <!-- Home Button -->
+                <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Hub</span>
+                </a>
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container" style="margin-right: 12px;">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel">
+                        <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                        <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                        <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                        <a href="#" class="active"><i class="fa-solid fa-rocket"></i> Missions</a>
+                        <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                        <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                        <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                    </div>
+                </div>
+                <button id="student-toggle" class="btn-glow btn-student" title="Launch Flight Manual">
+                    <i class="fa-solid fa-book-atlas"></i>
+                    <span>Flight Manual</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Origin Section -->
+    <section id="origin" class="section-padding origin-hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">NASA / ESA / ISRO / JAXA DEEP SPACE CONSOLE</span>
+                <h1 class="glitch-title" data-text="SPACE MISSIONS">SPACE MISSIONS</h1>
+                <p class="hero-subtitle">
+                    Step into the command chamber of humanity's greatest endeavors. Inspect, simulate, and decode telemetry links from probes charting the frozen frontiers of interstellar space.
+                </p>
+                <div class="hero-actions">
+                    <a href="#simulator" class="btn-primary">
+                        <i class="fa-solid fa-terminal"></i> Enter Operations Lab
+                    </a>
+                    <a href="#comms-link" class="btn-secondary">
+                        <i class="fa-solid fa-satellite-dish"></i> Connect DSN Array
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mission Fleet Carousel Grid -->
+            <div class="mission-grid">
+                <!-- Voyager Card -->
+                <div class="mission-card" onclick="selectMissionDirectly(0)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-voyager"></canvas>
+                        <span class="card-tag tag-interstellar">INTERSTELLAR</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Voyager 1 & 2</h3>
+                        <p>Humanity's farthest messengers, drifting through interstellar space beyond our solar boundary, carrying our Golden Record greetings.</p>
+                        <span class="card-meta">Launched: 1977 | Current Status: Interstellar</span>
+                    </div>
+                </div>
+
+                <!-- JWST Card -->
+                <div class="mission-card" onclick="selectMissionDirectly(1)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-jwst"></canvas>
+                        <span class="card-tag tag-observatory">DEEP SPACE OBS</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>James Webb Telescope</h3>
+                        <p>A colossal infrared observatory stationed at L2 Lagrange point, peering back 13.5 billion years to witness the birth of primeval stars.</p>
+                        <span class="card-meta">Launched: 2021 | Current Status: Operational</span>
+                    </div>
+                </div>
+
+                <!-- Apollo Card -->
+                <div class="mission-card" onclick="selectMissionDirectly(2)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-apollo"></canvas>
+                        <span class="card-tag tag-lunar">LUNAR LANDER</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Apollo 11</h3>
+                        <p>The legendary spaceflight that landed the first humans on the Moon, proving the power of sheer human will and trajectory precision.</p>
+                        <span class="card-meta">Landed: 1969 | Current Status: Completed</span>
+                    </div>
+                </div>
+
+                <!-- Mars Rover Card -->
+                <div class="mission-card" onclick="selectMissionDirectly(3)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-mars"></canvas>
+                        <span class="card-tag tag-planetary">ASTROBIOLOGY</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Mars Perseverance</h3>
+                        <p>A high-tech astrobiology robotic laboratory searching for fossilized microbial bio-signatures in the sediments of Jezero Crater.</p>
+                        <span class="card-meta">Landed: 2021 | Current Status: Operational</span>
+                    </div>
+                </div>
+
+                <!-- Artemis Card -->
+                <div class="mission-card" onclick="selectMissionDirectly(4)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-artemis"></canvas>
+                        <span class="card-tag tag-nextgen">NEXT-GEN LUNAR</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Artemis Program</h3>
+                        <p>The modern blueprint for sustained deep-space lunar colonies, preparing humanity for the historical leap toward Mars transport.</p>
+                        <span class="card-meta">Active Stage: II | Current Status: Preparing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Operations Simulator Section -->
+    <section id="simulator" class="section-padding simulator-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">INTERACTIVE FLIGHT MECHANICS</span>
+                <h2 class="glowing-heading">Operations Lab</h2>
+                <p>Select a mission payload below, adjust the physical orbital parameters, and watch live trajectory telemetry calculations shift.</p>
+            </div>
+
+            <div class="simulator-wrapper">
+                <!-- Selectors Sidebar -->
+                <div class="selector-sidebar">
+                    <h3>SELECT MISSION</h3>
+                    <div class="selector-list">
+                        <button class="selector-btn active" onclick="selectMission(0)">
+                            <i class="fa-solid fa-satellite"></i> Voyager 1 & 2
+                        </button>
+                        <button class="selector-btn" onclick="selectMission(1)">
+                            <i class="fa-solid fa-eye"></i> James Webb (JWST)
+                        </button>
+                        <button class="selector-btn" onclick="selectMission(2)">
+                            <i class="fa-solid fa-moon"></i> Apollo 11 Lander
+                        </button>
+                        <button class="selector-btn" onclick="selectMission(3)">
+                            <i class="fa-solid fa-car-rover"></i> Mars Perseverance
+                        </button>
+                        <button class="selector-btn" onclick="selectMission(4)">
+                            <i class="fa-solid fa-rocket"></i> Artemis Gateway
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Core Laboratory Viewport -->
+                <div class="simulator-main">
+                    <div class="simulator-header-ops">
+                        <div class="telemetry-online-tag">
+                            <span class="pulse-dot"></span>
+                            <span id="active-mission-title">VOYAGER INTERSTELLAR SYSTEM</span>
+                        </div>
+                        <div class="hud-timer">TIME SECS: <span id="ops-clock">000.00</span></div>
+                    </div>
+
+                    <div class="viewport-hud-layout">
+                        <!-- Canvas Screen Frame -->
+                        <div class="viewport-frame">
+                            <canvas id="mission-canvas"></canvas>
+                            <!-- High-Tech Target Crosshair Overlays -->
+                            <div class="viewport-overlay-corner top-left"></div>
+                            <div class="viewport-overlay-corner top-right"></div>
+                            <div class="viewport-overlay-corner bottom-left"></div>
+                            <div class="viewport-overlay-corner bottom-right"></div>
+                        </div>
+
+                        <!-- Parameter Tuning Controls Dashboard -->
+                        <div class="controls-card">
+                            <h3>CONTROLS & PARAMETERS</h3>
+                            
+                            <div id="dynamic-controls-container" class="sliders-list">
+                                <!-- Generated Dynamically in Javascript -->
+                            </div>
+
+                            <!-- Realtime HUD Calculations Deck -->
+                            <div class="hud-stats-box">
+                                <h4>TELEMETRY FEEDS (CALCULATED LIVE)</h4>
+                                <div class="hud-stats-grid" id="hud-readouts-container">
+                                    <!-- Populated Dynamically in JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Space Network Comms Linker Section -->
+    <section id="comms-link" class="section-padding comms-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">DSN ANTENNA TELEMETRY TUNER</span>
+                <h2 class="glowing-heading">Deep Space Communication</h2>
+                <p>Tune the Deep Space Network (DSN) receiving station antennas to resolve carrier waves drifting from interstellar space. Align waves to 100% to decrypt logs.</p>
+            </div>
+
+            <div class="comms-box">
+                <!-- Dual Oscilloscope Screen Panel -->
+                <div class="oscilloscope-hud">
+                    <div class="oscilloscope-screen-box">
+                        <span class="oscilloscope-label">SIGNAL OBSERVATION VIEWPORT</span>
+                        <canvas id="dsn-canvas"></canvas>
+                        <div class="screen-glare"></div>
+                    </div>
+
+                    <!-- Alignment Locking Telemetry Panel -->
+                    <div class="tuning-lock-deck">
+                        <div class="lock-metric-box">
+                            <span class="metric-label">CARRIER RESONANCE FREQ</span>
+                            <div class="metric-value" id="lock-percent">0%</div>
+                        </div>
+                        <div class="alignment-bar-container">
+                            <div class="alignment-bar" id="lock-progress" style="width: 0%"></div>
+                        </div>
+                        <button id="comms-decrypt-btn" class="btn-lock" disabled>
+                            <i class="fa-solid fa-lock"></i> SIGNAL UNLOCKED
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Signal Dials Control Grid -->
+                <div class="dials-grid-panel">
+                    <h3>DSN RECEIVER ALIGNMENT DIALS</h3>
+                    <p class="tuner-instruction">Scrambled Signal (Cyan) must align precisely with Target Carrier Resonance Wave (Magenta).</p>
+                    
+                    <div class="dials-controls">
+                        <!-- Frequency Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Carrier Frequency</span>
+                                <span class="dial-value" id="dial-val-freq">30 GHz</span>
+                            </div>
+                            <input type="range" id="dial-freq" min="20" max="80" value="30" class="neon-slider">
+                        </div>
+
+                        <!-- Phase Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Phase Shift</span>
+                                <span class="dial-value" id="dial-val-phase">120°</span>
+                            </div>
+                            <input type="range" id="dial-phase" min="0" max="360" value="120" class="neon-slider">
+                        </div>
+
+                        <!-- Gain Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Signal Gain Amp</span>
+                                <span class="dial-value" id="dial-val-gain">15 dB</span>
+                            </div>
+                            <input type="range" id="dial-gain" min="5" max="100" value="15" class="neon-slider">
+                        </div>
+
+                        <!-- Azimuth Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Azimuth Angle</span>
+                                <span class="dial-value" id="dial-val-azimuth">45°</span>
+                            </div>
+                            <input type="range" id="dial-azimuth" min="10" max="120" value="45" class="neon-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glowing Retro Scientific Decrypted Transcript Logs -->
+            <div class="terminal-deck-wrapper" id="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="t-dot red"></span>
+                        <span class="t-dot yellow"></span>
+                        <span class="t-dot green"></span>
+                    </div>
+                    <span class="terminal-title">DSN DECRYPTED DEEP-SPACE ARCHIVE</span>
+                    <i class="fa-solid fa-circle-nodes terminal-status-icon"></i>
+                </div>
+                <div class="terminal-screen" id="decrypted-screen">
+                    <p class="term-dim">SYSTEM ONLINE // ANTENNAS STOWED // DSN TELEMETRY CARRIER DISCONNECTED...</p>
+                    <p class="term-dim">> Tuning carrier frequency dials to active mission signature is required to open communications uplink...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Sliding Mission Flight Manual / Science Drawer -->
+    <div id="student-drawer" class="student-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>FLIGHT MANUAL</h2>
+            </div>
+            <button id="drawer-close" class="drawer-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-tabs">
+            <button id="tab-btn-science" class="drawer-tab-btn active" onclick="switchDrawerTab(0)">
+                <i class="fa-solid fa-flask"></i>
+                <span>Orbits & Science</span>
+            </button>
+            <button id="tab-btn-code" class="drawer-tab-btn" onclick="switchDrawerTab(1)">
+                <i class="fa-solid fa-code"></i>
+                <span>Canvas Math</span>
+            </button>
+            <button id="tab-btn-inspector" class="drawer-tab-btn" onclick="switchDrawerTab(2)">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>State Debugger</span>
+            </button>
+        </div>
+
+        <div class="drawer-body">
+            <!-- Science Content Tab -->
+            <div id="drawer-tab-science" class="drawer-tab-content active">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- Canvas Code Breakdown Tab -->
+            <div id="drawer-tab-code" class="drawer-tab-content">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- State Debugger Live Inspection Tab -->
+            <div id="drawer-tab-inspector" class="drawer-tab-content">
+                <h3>🔍 Live Variable Inspector</h3>
+                <p>This console outputs dynamic operational parameters within the global JavaScript <code>state</code> structure in real time as values adjust.</p>
+                <div class="inspector-card">
+                    <h4>GLOBAL STATE CONSTANTS</h4>
+                    <pre id="inspect-state" class="inspector-json">Initializing feeds...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>COSMIC<span>HORIZONS</span></h2>
+                <p>An interactive, educational simulator modeling deep space science, orbital trajectory calculations, and communications antenna mechanics for aspiring aerospace minds.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Fleet Operations</h4>
+                <a href="#origin"><i class="fa-solid fa-angle-right"></i> Explore Fleet</a>
+                <a href="#simulator"><i class="fa-solid fa-angle-right"></i> Simulator Lab</a>
+                <a href="#comms-link"><i class="fa-solid fa-angle-right"></i> Receivers Link</a>
+            </div>
+            <div class="footer-links">
+                <h4>Cosmic Portals</h4>
+                <a href="universe.html"><i class="fa-solid fa-angles-right"></i> Universe Hub</a>
+                <a href="phenomana.html"><i class="fa-solid fa-angles-right"></i> Mysterious Phenomena</a>
+                <a href="missions.html" class="active"><i class="fa-solid fa-angles-right"></i> Space Missions</a>
+            </div>
+            <div class="footer-links">
+                <h4>System Portals</h4>
+                <a href="planets.html"><i class="fa-solid fa-angles-right"></i> Planets & Moons</a>
+                <a href="facts.html"><i class="fa-solid fa-angles-right"></i> Cosmic Facts</a>
+                <a href="discoveries.html"><i class="fa-solid fa-angles-right"></i> Latest Discoveries</a>
+            </div>
+            <div class="footer-meta">
+                <p>&copy; 2026 Space Missions Operations Hub. Built for educational study. Spacetime coordinates locked.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script JS -->
+    <script src="missions.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFacts: Cosmic Observatory Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Stars Canvas System -->
+    <canvas id="portal-background-canvas" class="portal-bg"></canvas>
+
+    <!-- Header Panel -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-satellite-dish logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <div class="header-actions">
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel" style="right: 0;">
+                                <a href="#" class="active"><i class="fa-solid fa-house"></i> Hub Home</a>
+                                <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                                <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                                <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                                <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                                <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                                <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                            </div>
+                </div>
+                <a href="login.html" class="nav-login-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                        <polyline points="10 17 15 12 10 7" />
+                        <line x1="15" y1="12" x2="3" y2="12" />
+                    </svg>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Hero Landing -->
+    <section class="container hero-section">
+        <span class="badge animate-fade-in-up">
+            <span class="pulse-dot"></span>
+            EXPLORE THE COSMOS WITH US
+        </span>
+        <h1 class="hero-title animate-fade-in-up delay-100">Discover the <span>Universe</span></h1>
+        <p class="hero-subtitle animate-fade-in-up delay-200">
+            Welcome to UniFacts, your ultimate digital astrophysics observatory. Dive into interactive simulations, explore mysterious cosmic phenomena, and stay updated with the latest planetary discoveries. The universe is yours to uncover.
+        </p>
+        <div class="hero-cta animate-fade-in-up delay-300">
+            <a href="#portal-grid" class="btn-glow primary-btn animate-pulse-glow">
+                <i class="fa-solid fa-rocket"></i> Start Exploring
+            </a>
+            <a id="watch-trailer-btn" href="#system-telemetry" class="btn-glow secondary-btn">
+                <i class="fa-solid fa-play"></i> Watch Trailer
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section / Features -->
+    <section class="container features-section section-padding">
+        <div class="section-header text-center">
+            <h2 class="section-title">Why Choose <span>UniFacts?</span></h2>
+            <p class="section-subtitle">Experience a cutting-edge educational platform built for space enthusiasts of all levels.</p>
+        </div>
+        <div class="features-grid">
+            <a href="models.html" class="feature-card animate-fade-in-up delay-100" style="text-decoration: none; display: block;">
+                <div class="feature-icon animate-float"><i class="fa-solid fa-vr-cardboard"></i></div>
+                <h3>Interactive Models</h3>
+                <p>Engage with 3D physical models of black holes, solar systems, and cosmic structures in real-time.</p>
+            </a>
+            <a href="telemetry.html" class="feature-card animate-fade-in-up delay-200" style="text-decoration: none; display: block;">
+                <div class="feature-icon animate-float"><i class="fa-solid fa-satellite-dish"></i></div>
+                <h3>Live Telemetry</h3>
+                <p>Access up-to-date space weather, planetary tracking, and deep space network telemetry data.</p>
+            </a>
+            <a href="insights.html" class="feature-card animate-fade-in-up delay-300" style="text-decoration: none; display: block;">
+                <div class="feature-icon animate-float"><i class="fa-solid fa-user-astronaut"></i></div>
+                <h3>Expert Insights</h3>
+                <p>Curated cosmic facts and educational pathways verified by astrophysics researchers.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Six Core Gateway Cards Grid -->
+    <section class="container portal-section section-padding" id="explore">
+        <div class="section-header text-center">
+            <h2 class="section-title">Explore <span>Our Sectors</span></h2>
+            <p class="section-subtitle">Navigate through our six core modules to uncover the mysteries of the cosmos.</p>
+        </div>
+        <div class="portal-grid" id="portal-grid">
+            
+            <!-- Segment 1: About the Universe & Multiverse -->
+            <a href="universe.html" class="portal-card" style="--glow-color: var(--clr-universe); --glow-rgb: 192, 132, 252;">
+                <div class="card-top">
+                    <canvas class="card-canvas" id="canvas-universe"></canvas>
+                    <span class="card-badge">COSMOLOGY</span>
+                </div>
+                <div class="card-body">
+                    <h3>Universe & Multiverse</h3>
+                    <p>Explore Big Bang scale factor inflation models, nuclear carbon synthesis curves, event horizons, and chaotic quantum eternal multiverse bubbles.</p>
+                    <div class="card-footer">
+                        <span class="card-stats">5 Physics viewports</span>
+                        <i class="fa-solid fa-arrow-right-long card-link-arrow"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Segment 2: Mysterious Phenomena -->
+            <a href="phenomana.html" class="portal-card" style="--glow-color: var(--clr-phenomena); --glow-rgb: 244, 63, 94;">
+                <div class="card-top">
+                    <canvas class="card-canvas" id="canvas-phenomana"></canvas>
+                    <span class="card-badge">MYSTERIES</span>
+                </div>
+                <div class="card-body">
+                    <h3>Mysterious Phenomena</h3>
+                    <p>Model Einstein-Rosen wormholes warping local spacetime, monitor Hawking radiation rates, cosmic strings, and dark matter galactic rotation velocity flattening halos.</p>
+                    <div class="card-footer">
+                        <span class="card-stats">5 Interactive models</span>
+                        <i class="fa-solid fa-arrow-right-long card-link-arrow"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Segment 3: Cosmic Space Missions -->
+            <a href="missions.html" class="portal-card" style="--glow-color: var(--clr-missions); --glow-rgb: 245, 158, 11;">
+                <div class="card-top">
+                    <canvas class="card-canvas" id="canvas-missions"></canvas>
+                    <span class="card-badge">MISSIONS</span>
+                </div>
+                <div class="card-body">
+                    <h3>Space Missions</h3>
+                    <p>Model orbital slingshots, interplanetary trajectory burns, planetary aerobraking heat indexes, DSN telemetry carrier alignment locks, and exoplanet biosignatures.</p>
+                    <div class="card-footer">
+                        <span class="card-stats">5 Flight telemetry grids</span>
+                        <i class="fa-solid fa-arrow-right-long card-link-arrow"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Segment 4: Planets & Moons System -->
+            <a href="planets.html" class="portal-card" style="--glow-color: var(--clr-planets); --glow-rgb: 0, 242, 254;">
+                <div class="card-top">
+                    <canvas class="card-canvas" id="canvas-planets"></canvas>
+                    <span class="card-badge">PLANETARY</span>
+                </div>
+                <div class="card-body">
+                    <h3>Planets & Moons</h3>
+                    <p>Simulate three-body orbital decays, planetary magnetic core magnetopauses, tidal lock circular velocities, and hydrostatic gas giant core compression limits.</p>
+                    <div class="card-footer">
+                        <span class="card-stats">5 Dynamic physics viewports</span>
+                        <i class="fa-solid fa-arrow-right-long card-link-arrow"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Segment 5: Cosmic Facts -->
+            <a href="facts.html" class="portal-card" style="--glow-color: var(--clr-facts); --glow-rgb: 16, 185, 129;">
+                <div class="card-top">
+                    <canvas class="card-canvas" id="canvas-facts"></canvas>
+                    <span class="card-badge">COSMIC FACTS</span>
+                </div>
+                <div class="card-body">
+                    <h3>Cosmic Facts Portal</h3>
+                    <p>Decode relics from the CMB microwave background, analyze thermonuclear carbon forged elements, stellar supernova corpse remnants, and flat galactic curve offsets.</p>
+                    <div class="card-footer">
+                        <span class="card-stats">5 Interactive fact modelers</span>
+                        <i class="fa-solid fa-arrow-right-long card-link-arrow"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Segment 6: Latest Space Discoveries -->
+            <a href="discoveries.html" class="portal-card" style="--glow-color: var(--clr-discoveries); --glow-rgb: 59, 130, 246;">
+                <div class="card-top">
+                    <canvas class="card-canvas" id="canvas-discoveries"></canvas>
+                    <span class="card-badge">DISCOVERIES</span>
+                </div>
+                <div class="card-body">
+                    <h3>Latest Discoveries</h3>
+                    <p>Scan exoplanet atmospheric water spectrum absorption levels, tune gravitational wave interferometry loops, and align CMB Planck carrier antennas.</p>
+                    <div class="card-footer">
+                        <span class="card-stats">5 Relic telemetry consoles</span>
+                        <i class="fa-solid fa-arrow-right-long card-link-arrow"></i>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Mission Control console Section -->
+    <section id="system-telemetry" class="container console-section">
+        <span class="console-header-badge">INTEGRATED OBSERVATORY CONTROL CENTER</span>
+        <h2 class="glowing-heading">System Telemetry & Controls</h2>
+        
+        <div class="console-grid">
+            
+            <!-- Column 1: Telemetry & Constant Solver -->
+            <div class="telemetry-card">
+                <div class="telemetry-header">
+                    <h3>COSMIC CONSTANTS & TELEMETRY</h3>
+                    <div class="telemetry-active-tag">
+                        <span class="telemetry-pulse"></span>
+                        <span class="telemetry-status">LIVE SOLVER</span>
+                    </div>
+                </div>
+                
+                <div class="telemetry-list">
+                    <div class="constant-control">
+                        <div class="slider-label-row">
+                            <span class="ctrl-title">Hubble Parameter (H₀)</span>
+                            <span class="accent-val font-mono" id="val-h0">70 km/s/Mpc</span>
+                        </div>
+                        <input type="range" id="range-h0" min="50" max="100" value="70" class="neon-slider slider-purple">
+                    </div>
+                    
+                    <div class="constant-control">
+                        <div class="slider-label-row">
+                            <span class="ctrl-title">Matter Density (Ω_m)</span>
+                            <span class="accent-val font-mono" id="val-omega">0.30</span>
+                        </div>
+                        <input type="range" id="range-omega" min="1" max="200" value="30" class="neon-slider slider-cyan">
+                    </div>
+
+                    <div class="telemetry-metrics-output">
+                        <div class="metric-row">
+                            <span class="m-label">Est. Cosmic Age:</span>
+                            <span class="m-value font-mono" id="calc-age">13.9 Gyr</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="m-label">Cosmic Geometry:</span>
+                            <span class="m-value font-mono" id="calc-geometry">Flat (Infinite Expansion)</span>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-divider"></div>
+
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">CORE SYSTEM LOAD PARAMETER</div>
+                        <div class="telemetry-value-box">
+                            <span class="telemetry-value font-mono">100% SECURE</span>
+                            <div class="telemetry-bar-bg"><div class="telemetry-bar" style="width: 100%; --bar-color: var(--clr-planets);"></div></div>
+                        </div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">MODULE SECTOR LINKS ALIGNED</div>
+                        <div class="telemetry-value-box">
+                            <span class="telemetry-value font-mono">6 / 6 ONLINE</span>
+                            <div class="telemetry-bar-bg"><div class="telemetry-bar" style="width: 100%; --bar-color: var(--clr-facts);"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Doppler Redshift Spectrum Simulator -->
+            <div class="spectrum-card">
+                <div class="telemetry-header">
+                    <h3>DOPPLER SPECTRAL SHIFT ANALYZER</h3>
+                    <div class="telemetry-active-tag">
+                        <span class="telemetry-pulse" style="background: var(--clr-phenomena); box-shadow: 0 0 6px var(--clr-phenomena);"></span>
+                        <span class="telemetry-status" style="color: var(--clr-phenomena);">SPECTROMETER</span>
+                    </div>
+                </div>
+                
+                <div class="spectrum-canvas-wrapper">
+                    <canvas id="spectrum-canvas"></canvas>
+                </div>
+
+                <div class="constant-control" style="margin-top: 1rem;">
+                    <div class="slider-label-row">
+                        <span class="ctrl-title">Cosmological Redshift (z)</span>
+                        <span class="accent-val font-mono" id="val-z" style="color: var(--clr-phenomena);">0.00</span>
+                    </div>
+                    <input type="range" id="range-z" min="0" max="400" value="0" class="neon-slider slider-magenta">
+                </div>
+
+                <div class="telemetry-metrics-output" style="margin-top: 1.25rem;">
+                    <div class="metric-row">
+                        <span class="m-label">Shifted Wavelength (H-α):</span>
+                        <span class="m-value font-mono" id="calc-wave">656.3 nm</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="m-label">Recessional Velocity:</span>
+                        <span class="m-value font-mono" id="calc-speed">0.00 km/s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal box -->
+            <div class="terminal-wrapper">
+                <div class="terminal-top-bar">
+                    <div class="terminal-dots">
+                        <span class="t-dot red"></span>
+                        <span class="t-dot yellow"></span>
+                        <span class="t-dot green"></span>
+                    </div>
+                    <span class="terminal-title">UNIFACTS FLIGHT DIAGNOSTICS DECK <span id="terminal-ticker" class="ticker-active">[SYS: OK]</span></span>
+                    <i class="fa-solid fa-satellite terminal-status-icon"></i>
+                </div>
+                <div class="terminal-screen" id="terminal-screen">
+                    <!-- Controlled by Javascript -->
+                </div>
+                
+                <div class="terminal-input-line">
+                    <span class="term-prompt">guest@unifacts:~#</span>
+                    <input type="text" id="terminal-input" class="terminal-cmd-input" placeholder="Type command (e.g. 'help', 'status', 'scan') and press Enter..." autocomplete="off">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Quick diagnostics links tags block -->
+        <div class="quick-cmds-box">
+            <button class="quick-cmd-btn" onclick="runQuickCommand('help')">RUN help</button>
+            <button class="quick-cmd-btn" onclick="runQuickCommand('orbital')">RUN orbital</button>
+            <button class="quick-cmd-btn" onclick="runQuickCommand('redshift')">RUN redshift</button>
+            <button class="quick-cmd-btn" onclick="runQuickCommand('exoplanet')">RUN exoplanet</button>
+            <button class="quick-cmd-btn" onclick="runQuickCommand('distance')">RUN distance</button>
+            <button class="quick-cmd-btn" onclick="runQuickCommand('gravity')">RUN gravity</button>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section section-padding">
+        <div class="container newsletter-container animate-fade-in-up delay-100 scanline-effect">
+            <div class="newsletter-content">
+                <h2 class="section-title">Stay <span>Updated</span></h2>
+                <p>Join our community of space explorers to get the latest cosmic news, facts, and observatory updates delivered directly to your inbox.</p>
+            </div>
+            <form class="newsletter-form" onsubmit="event.preventDefault();">
+                <input type="email" placeholder="Enter your email address" required class="newsletter-input">
+                <button type="submit" class="btn-glow primary-btn"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>UNI<span>FACTS</span></h2>
+                <p>A premium unified aerospace educational portal featuring real-time astrophysics simulations, interactive vector cards, DSN signal tuners, and dynamic orbital playgrounds.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Observatory Portals</h4>
+                <a href="universe.html"><i class="fa-solid fa-angles-right"></i> Universe & Multiverse</a>
+                <a href="phenomana.html"><i class="fa-solid fa-angles-right"></i> Mysterious Phenomena</a>
+                <a href="missions.html"><i class="fa-solid fa-angles-right"></i> Space Missions</a>
+            </div>
+            <div class="footer-links">
+                <h4>System Links</h4>
+                <a href="planets.html"><i class="fa-solid fa-angles-right"></i> Planets & Moons</a>
+                <a href="facts.html"><i class="fa-solid fa-angles-right"></i> Cosmic Facts</a>
+                <a href="discoveries.html"><i class="fa-solid fa-angles-right"></i> Latest Discoveries</a>
+            </div>
+        </div>
+        <div class="container footer-meta">
+            <p>&copy; 2026 UniFacts Space Observatory Center. Built for aerospace and physics research academy. All models aligned.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Portal Script -->
+    <script src="index.js"></script>
+</body>
+</html>

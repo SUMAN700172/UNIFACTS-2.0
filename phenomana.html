@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFacts: Mysterious Phenomena</title>
+    <meta name="description" content="Explore the most profound, unexplained cosmic phenomena. Interact with simulators, decode deep-space signals, and delve into the anomalies of the cosmos.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="phenomana.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cosmic Background Canvas -->
+    <canvas id="starfield-canvas"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="glass-header">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <span class="pulse-dot"></span>
+            <h1>UNI<span>FACTS</span></h1>
+        </a>
+        <nav class="nav-links">
+            <a href="#hero" class="active">Origin</a>
+            <a href="#phenomena">Phenomena</a>
+            <a href="#observatory">Observation Lab</a>
+            <a href="#decoder">Signal Decoder</a>
+        </nav>
+        <div class="header-actions">
+            <!-- Home Button -->
+            <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;" aria-label="Go to Hub Home">
+                <i class="fa-solid fa-house"></i>
+                <span>Hub</span>
+            </a>
+            <!-- Sectors Dropdown -->
+            <div class="sectors-dropdown-container" style="margin-right: 12px;">
+                <button type="button" class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu" aria-expanded="false">
+                    <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                </button>
+                <div class="sectors-dropdown-menu glass-panel">
+                    <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                    <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                    <a href="#" class="active"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                    <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                    <a href="planets.html"><i class="fa-solid fa-globe"></i> Planets</a>
+                    <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                    <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                </div>
+            </div>
+            <button type="button" id="student-toggle" class="btn-glow btn-student" aria-label="Toggle Student Guide" aria-expanded="false" style="margin-right: 12px; border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);">
+                <i class="fa-solid fa-graduation-cap"></i> <span>Student Guide</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="glow-tag">Deep Space Observatory</div>
+            <h2 class="glitch-title" data-text="UNRAVEL THE UNKNOWN">UNRAVEL THE UNKNOWN</h2>
+            <p class="hero-subtitle">Step into the shadows of the cosmos. Explore gravitational singularities, invisible scaffolds, and signals pulsing from the dawn of time.</p>
+            <div class="hero-actions">
+                <a href="#phenomena" class="btn-primary">
+                    <span>Begin Exploration</span>
+                    <i class="fa-solid fa-compass-drafting"></i>
+                </a>
+                <a href="#decoder" class="btn-secondary">
+                    <span>Tune Signal Decoder</span>
+                    <i class="fa-solid fa-radio"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll to Descend</span>
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phenomena Grid Section -->
+    <section id="phenomena" class="section-padding">
+        <div class="section-header text-center">
+            <h2 class="glowing-heading">COSMIC ANOMALIES</h2>
+            <div class="glow-divider"></div>
+            <p class="section-description">A curated index of the universe's most haunting, beautiful, and mathematically defying mysteries.</p>
+        </div>
+
+        <div class="phenomena-grid">
+            <!-- Black Hole -->
+            <div class="phenomenon-card" data-index="0" onclick="selectObservation(0)">
+                <div class="card-image-container">
+                    <img src="C:/Users/Asus rog/.gemini/antigravity/brain/a79331d7-40d6-434b-8128-50255707f580/black_hole_singularity_1779192376632.png" alt="Supermassive Black Hole" class="card-img" onerror="handleImageError(this, 0)">
+                    <div class="card-overlay"></div>
+                    <span class="card-tag tag-cyan">Singularity</span>
+                </div>
+                <div class="card-body">
+                    <h3>Black Holes & Singularities</h3>
+                    <p>Warped spacetimes where gravity is so absolute that not even light can escape the crushing embrace of their infinite density.</p>
+                    <div class="card-footer">
+                        <span class="explore-hint">Simulate in Lab <i class="fa-solid fa-angle-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dark Matter -->
+            <div class="phenomenon-card" data-index="1" onclick="selectObservation(1)">
+                <div class="card-image-container">
+                    <img src="C:/Users/Asus rog/.gemini/antigravity/brain/a79331d7-40d6-434b-8128-50255707f580/dark_matter_web_1779192395547.png" alt="Dark Matter Cosmic Web" class="card-img" onerror="handleImageError(this, 1)">
+                    <div class="card-overlay"></div>
+                    <span class="card-tag tag-purple">95% Invisible</span>
+                </div>
+                <div class="card-body">
+                    <h3>Dark Matter & Dark Energy</h3>
+                    <p>The unseen phantom scaffolding of the cosmos. Holding galaxies together and simultaneously driving the expansion of space itself.</p>
+                    <div class="card-footer">
+                        <span class="explore-hint">Simulate in Lab <i class="fa-solid fa-angle-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fast Radio Bursts -->
+            <div class="phenomenon-card" data-index="2" onclick="selectObservation(2)">
+                <div class="card-image-container">
+                    <img src="C:/Users/Asus rog/.gemini/antigravity/brain/a79331d7-40d6-434b-8128-50255707f580/fast_radio_burst_1779192413226.png" alt="Fast Radio Burst" class="card-img" onerror="handleImageError(this, 2)">
+                    <div class="card-overlay"></div>
+                    <span class="card-tag tag-magenta">Transient Pulse</span>
+                </div>
+                <div class="card-body">
+                    <h3>Fast Radio Bursts (FRBs)</h3>
+                    <p>Extremely energetic millisecond-long bursts of radio waves flashing across billions of light years. Their exact origin remains unknown.</p>
+                    <div class="card-footer">
+                        <span class="explore-hint">Simulate in Lab <i class="fa-solid fa-angle-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rogue Planets -->
+            <div class="phenomenon-card" data-index="3" onclick="selectObservation(3)">
+                <div class="card-image-container">
+                    <img src="C:/Users/Asus rog/.gemini/antigravity/brain/a79331d7-40d6-434b-8128-50255707f580/rogue_planet_1779192429997.png" alt="Frozen Rogue Planet" class="card-img" onerror="handleImageError(this, 3)">
+                    <div class="card-overlay"></div>
+                    <span class="card-tag tag-blue">Nomads</span>
+                </div>
+                <div class="card-body">
+                    <h3>Rogue Planets</h3>
+                    <p>Frozen, silent giant worlds cast out from their solar systems, drifting through the dark space between stars in eternal cold.</p>
+                    <div class="card-footer">
+                        <span class="explore-hint">Simulate in Lab <i class="fa-solid fa-angle-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Great Attractor -->
+            <div class="phenomenon-card" data-index="4" onclick="selectObservation(4)">
+                <div class="card-image-container">
+                    <img src="C:/Users/Asus rog/.gemini/antigravity/brain/a79331d7-40d6-434b-8128-50255707f580/great_attractor_1779192446806.png" alt="The Great Attractor" class="card-img" onerror="handleImageError(this, 4)">
+                    <div class="card-overlay"></div>
+                    <span class="card-tag tag-red">Gravitational Pull</span>
+                </div>
+                <div class="card-body">
+                    <h3>The Great Attractor</h3>
+                    <p>A giant gravitational anomaly located in the Laniakea Supercluster, slowly pulling our entire Milky Way and other galaxies towards it.</p>
+                    <div class="card-footer">
+                        <span class="explore-hint">Simulate in Lab <i class="fa-solid fa-angle-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Observation & Simulation Lab Section -->
+    <section id="observatory" class="section-padding observatory-section">
+        <div class="section-header text-center">
+            <h2 class="glowing-heading">THE OBSERVATION LAB</h2>
+            <div class="glow-divider"></div>
+            <p class="section-description">Tune stellar factors and simulate physical behavior of cosmic enigmas in real time.</p>
+        </div>
+
+        <div class="observatory-wrapper glass-panel">
+            <!-- Lab Sidebar Selector -->
+            <div class="lab-sidebar">
+                <h3>Select Anomaly</h3>
+                <div class="lab-selectors">
+                    <button class="selector-btn active" onclick="selectObservation(0)">
+                        <i class="fa-solid fa-circle-nodes"></i> Black Hole
+                    </button>
+                    <button class="selector-btn" onclick="selectObservation(1)">
+                        <i class="fa-solid fa-network-wired"></i> Dark Matter
+                    </button>
+                    <button class="selector-btn" onclick="selectObservation(2)">
+                        <i class="fa-solid fa-wave-square"></i> Fast Radio Burst
+                    </button>
+                    <button class="selector-btn" onclick="selectObservation(3)">
+                        <i class="fa-solid fa-globe"></i> Rogue Planet
+                    </button>
+                    <button class="selector-btn" onclick="selectObservation(4)">
+                        <i class="fa-solid fa-magnet"></i> The Great Attractor
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lab Main Screen -->
+            <div class="lab-viewport">
+                <!-- Simulator Canvas/Render Box -->
+                <div class="lab-visualizer-container">
+                    <div class="visualizer-header">
+                        <span class="status-indicator"><span class="pulse"></span> ONLINE</span>
+                        <h4 id="visualizer-title">Black Hole Singularity Simulator</h4>
+                        <span class="coords-display" id="coords-text">RA 17h 45m 40s / Dec -29° 0' 28"</span>
+                    </div>
+                    <div class="visualizer-canvas-box">
+                        <canvas id="simulator-canvas"></canvas>
+                        <div class="hud-overlay" id="hud-overlay">
+                            <!-- Overlay readings change based on selected phenomena -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls & Info Panels -->
+                <div class="lab-details-container">
+                    <!-- Dynamic Controls Panel -->
+                    <div class="controls-panel glass-subpanel">
+                        <h3>Simulation Controls</h3>
+                        <div id="controls-inputs" class="controls-inputs">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Logs & Sci-Fi details -->
+                    <div class="logs-panel glass-subpanel">
+                        <h3>Observatory Log</h3>
+                        <div class="log-content" id="log-text">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signal Decoder Section -->
+    <section id="decoder" class="section-padding decoder-section">
+        <div class="section-header text-center">
+            <h2 class="glowing-heading">INTERSTELLAR DECODER</h2>
+            <div class="glow-divider"></div>
+            <p class="section-description">A deep-space radio telescope has intercepted an anomalous, highly scrambled signal. Tune the dials to filter noise and reveal the cosmos's message.</p>
+        </div>
+
+        <div class="decoder-container glass-panel">
+            <div class="decoder-hud">
+                <!-- Left Screen: Signal Waveform -->
+                <div class="decoder-screen-box">
+                    <div class="screen-header">
+                        <span>SIGNAL OSCILLOSCOPE</span>
+                        <span id="match-percentage" class="glow-text">Alignment: 0%</span>
+                    </div>
+                    <div class="screen-canvas-container">
+                        <canvas id="decoder-canvas"></canvas>
+                        <div class="oscilloscope-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Right Controls: Tuning Dials -->
+                <div class="decoder-tuning-box">
+                    <h3>Telescope Tuning Array</h3>
+                    <div class="tuning-grid">
+                        <div class="tuning-dial">
+                            <span class="dial-label">Frequency (GHz)</span>
+                            <div class="slider-wrapper">
+                                <input type="range" id="dial-frequency" min="10" max="100" value="30" class="neon-slider">
+                                <span class="slider-val" id="val-frequency">30.0</span>
+                            </div>
+                        </div>
+                        <div class="tuning-dial">
+                            <span class="dial-label">Bandpass Filter (Hz)</span>
+                            <div class="slider-wrapper">
+                                <input type="range" id="dial-filter" min="5" max="50" value="45" class="neon-slider">
+                                <span class="slider-val" id="val-filter">45.0</span>
+                            </div>
+                        </div>
+                        <div class="tuning-dial">
+                            <span class="dial-label">Phase Shift (φ)</span>
+                            <div class="slider-wrapper">
+                                <input type="range" id="dial-phase" min="0" max="360" value="120" class="neon-slider">
+                                <span class="slider-val" id="val-phase">120°</span>
+                            </div>
+                        </div>
+                        <div class="tuning-dial">
+                            <span class="dial-label">Signal Gain (dB)</span>
+                            <div class="slider-wrapper">
+                                <input type="range" id="dial-gain" min="10" max="100" value="15" class="neon-slider">
+                                <span class="slider-val" id="val-gain">15.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="decode-btn" class="decode-btn glow-purple" disabled>
+                        <i class="fa-solid fa-satellite-dish"></i> DECODE SIGNAL
+                    </button>
+                </div>
+            </div>
+
+            <!-- Terminal Output System -->
+            <div class="decoder-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">DECODER_SHELL v1.42.0</span>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <p class="terminal-line text-cyan">> Deep-space telemetry initialized. Listening on frequency array 8.4 GHz...</p>
+                    <p class="terminal-line text-red">> WARNING: Highly scrambled signal anomaly detected from direction: RA 18h / Dec -12°.</p>
+                    <p class="terminal-line">> INSTRUCTION: Adjust parameters above to align the target signal (cyan) with the incoming anomaly (magenta).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>COSMIC ENIGMAS</h2>
+                <p>Exploring the unknown depths of space and gravitational science.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Observatory Nodes</h4>
+                <a href="#hero"><i class="fa-solid fa-angle-right"></i> Origin</a>
+                <a href="#phenomena"><i class="fa-solid fa-angle-right"></i> Index</a>
+                <a href="#observatory"><i class="fa-solid fa-angle-right"></i> Simulator</a>
+                <a href="#decoder"><i class="fa-solid fa-angle-right"></i> Decoder Lab</a>
+            </div>
+            <div class="footer-links">
+                <h4>Cosmic Portals</h4>
+                <a href="universe.html"><i class="fa-solid fa-angles-right"></i> Universe Hub</a>
+                <a href="missions.html"><i class="fa-solid fa-angles-right"></i> Space Missions</a>
+                <a href="planets.html"><i class="fa-solid fa-angles-right"></i> Planets & Moons</a>
+            </div>
+            <div class="footer-links">
+                <h4>System Portals</h4>
+                <a href="facts.html"><i class="fa-solid fa-angles-right"></i> Cosmic Facts</a>
+                <a href="discoveries.html"><i class="fa-solid fa-angles-right"></i> Latest Discoveries</a>
+            </div>
+            <div class="footer-copyright" style="width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 2rem; margin-top: 1rem;">
+                <p>&copy; 2026 Cosmic Enigmas Project. Created for inquisitive minds. Data sourced from synthetic stellar telemetry.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Student Study Drawer / Code Specs -->
+    <div id="student-drawer" class="student-drawer glass-panel">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-graduation-cap text-cyan"></i>
+                <h2>COSMIC STUDY LAB</h2>
+            </div>
+            <button id="drawer-close" class="drawer-close-btn" aria-label="Close Drawer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <!-- Drawer Tabs -->
+        <div class="drawer-tabs">
+            <button class="drawer-tab-btn active" id="tab-btn-science" onclick="switchDrawerTab(0)">
+                <i class="fa-solid fa-square-root-variable"></i> Science & Math
+            </button>
+            <button class="drawer-tab-btn" id="tab-btn-code" onclick="switchDrawerTab(1)">
+                <i class="fa-solid fa-code"></i> Canvas Code
+            </button>
+            <button class="drawer-tab-btn" id="tab-btn-inspector" onclick="switchDrawerTab(2)">
+                <i class="fa-solid fa-chart-line"></i> State Inspector
+            </button>
+        </div>
+
+        <div class="drawer-body">
+            <!-- Tab 0: Science & Math Formulas -->
+            <div id="drawer-tab-science" class="drawer-tab-content active">
+                <!-- Populated dynamically based on active observatory tab -->
+            </div>
+
+            <!-- Tab 1: Canvas Code Breakdown -->
+            <div id="drawer-tab-code" class="drawer-tab-content">
+                <!-- Populated dynamically based on active observatory tab -->
+            </div>
+
+            <!-- Tab 2: Live Variable Inspector -->
+            <div id="drawer-tab-inspector" class="drawer-tab-content">
+                <div class="inspector-card">
+                    <h4>Live Variables (Global state)</h4>
+                    <pre class="inspector-json" id="inspect-state">
+<!-- Live variable dump -->
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="phenomana.js"></script>
+</body>
+</html>

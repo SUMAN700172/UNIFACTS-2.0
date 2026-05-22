@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFacts: Planets & Moons</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="planets.css">
+</head>
+<body>
+
+    <!-- Background Space Canvas System -->
+    <canvas id="universe-background" class="universe-bg"></canvas>
+
+    <!-- Global Glowing Header -->
+    <header class="glass-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-planet-ringed logo-glow"></i>
+                <h1>UNI<span>FACTS</span></h1>
+            </a>
+            <nav class="nav-links">
+                <a href="#origin" class="active">Worlds Cards</a>
+                <a href="#playground">Planetary Lab</a>
+                <a href="#comms-link">Radio Decoder</a>
+            </nav>
+            <div class="header-actions">
+                <!-- Home Button -->
+                <a href="index.html" class="btn-glow btn-home" title="Return to Hub Home" style="margin-right: 8px;">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Hub</span>
+                </a>
+                <!-- Sectors Dropdown -->
+                <div class="sectors-dropdown-container" style="margin-right: 12px;">
+                    <button class="btn-glow sectors-toggle" aria-label="Toggle Sectors Menu">
+                        <i class="fa-solid fa-compass"></i> <span>Sectors</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; margin-left: 4px;"></i>
+                    </button>
+                    <div class="sectors-dropdown-menu glass-panel">
+                        <a href="index.html"><i class="fa-solid fa-house"></i> Hub Home</a>
+                        <a href="universe.html"><i class="fa-solid fa-bahai"></i> Universe</a>
+                        <a href="phenomana.html"><i class="fa-solid fa-circle-nodes"></i> Phenomena</a>
+                        <a href="missions.html"><i class="fa-solid fa-rocket"></i> Missions</a>
+                        <a href="#" class="active"><i class="fa-solid fa-globe"></i> Planets</a>
+                        <a href="facts.html"><i class="fa-solid fa-square-root-variable"></i> Cosmic Facts</a>
+                        <a href="discoveries.html"><i class="fa-solid fa-satellite"></i> Discoveries</a>
+                    </div>
+                </div>
+                <button id="student-toggle" class="btn-glow btn-student" title="Launch Science Deck">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Science Deck</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Origin Section -->
+    <section id="origin" class="section-padding origin-hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">CELESTIAL MECHANICS LABORATORY</span>
+                <h1 class="glitch-title" data-text="PLANETS & MOONS">PLANETS & MOONS</h1>
+                <p class="hero-subtitle">
+                    Explore the physical interactions of cosmic double-systems. Model Europa's tidal oceans, Saturn's ring dynamics, Mars' decaying orbits, Earth's barycentric tides, and Pluto's eternal binary dance.
+                </p>
+                <div class="hero-actions">
+                    <a href="#playground" class="btn-primary">
+                        <i class="fa-solid fa-circle-nodes"></i> Launch Orbit Lab
+                    </a>
+                    <a href="#comms-link" class="btn-secondary">
+                        <i class="fa-solid fa-satellite-dish"></i> Capture World Radio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Worlds Fact Cards Grid -->
+            <div class="mission-grid">
+                <!-- System 1: Jupiter & Europa -->
+                <div class="mission-card" onclick="selectFactDirectly(0)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-jupiter"></canvas>
+                        <span class="card-tag tag-jupiter">OCEAN WORLD</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Jupiter & Europa</h3>
+                        <p>Europa is squeezed and stretched by Jupiter's massive gravity fields, creating friction-based tidal heating that maintains a saline ocean beneath 20km of surface ice.</p>
+                        <span class="card-meta">Heating Mode: Gravitational Tides | Ocean Depth: 100 km</span>
+                    </div>
+                </div>
+
+                <!-- System 2: Saturn & Titan -->
+                <div class="mission-card" onclick="selectFactDirectly(1)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-saturn"></canvas>
+                        <span class="card-tag tag-saturn">RING RESONANCE</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Saturn & Titan</h3>
+                        <p>Saturn is adorned with millions of orbiting ice particles shaped by shepherd moons, while Titan hosts a dense nitrogen atmosphere with active liquid methane lakes.</p>
+                        <span class="card-meta">Ring Type: Ice Sheets | Titan Liquids: Liquid Methane</span>
+                    </div>
+                </div>
+
+                <!-- System 3: Mars & Phobos -->
+                <div class="mission-card" onclick="selectFactDirectly(2)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-mars"></canvas>
+                        <span class="card-tag tag-mars">DECAYING SPIRAL</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Mars & Phobos</h3>
+                        <p>Phobos is spiraling inwards towards Mars at 1.8 meters per century. Within 30 million years, it will cross the Roche limit and break apart to form a planetary ring.</p>
+                        <span class="card-meta">Orbital Period: 7.6 Hours | Limit: Roche Disintegration</span>
+                    </div>
+                </div>
+
+                <!-- System 4: Earth & Luna -->
+                <div class="mission-card" onclick="selectFactDirectly(3)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-earth"></canvas>
+                        <span class="card-tag tag-earth">BARYCENTER TIDES</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Earth & Luna</h3>
+                        <p>Our planet and tidally locked Moon orbit a mutual center of mass located 4,670 km from Earth's center, pulling ocean tides in a constant gravitational dance.</p>
+                        <span class="card-meta">Center: Internal Barycenter | Lock: 1:1 Tidal Ratio</span>
+                    </div>
+                </div>
+
+                <!-- System 5: Pluto & Charon -->
+                <div class="mission-card" onclick="selectFactDirectly(4)">
+                    <div class="card-image-box">
+                        <canvas class="card-vector-canvas" id="canvas-card-pluto"></canvas>
+                        <span class="card-tag tag-pluto">BINARY SYSTEM</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Pluto & Charon</h3>
+                        <p>Charon is so massive compared to Pluto that their mutual center of mass lies in empty space between them. They wobble eternally around a true external barycenter.</p>
+                        <span class="card-meta">Double Planet: Mutual Lock | Barycenter: External Void</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Celestial Playground / Physics Lab Section -->
+    <section id="playground" class="section-padding simulator-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">INTERACTIVE ORBITAL MODELER</span>
+                <h2 class="glowing-heading">Planetary Lab</h2>
+                <p>Select a world card below to load its orbital physics simulator. Tweak gravity, velocity, or distances to recalculate physical metrics in real time.</p>
+            </div>
+
+            <div class="simulator-wrapper">
+                <!-- Selectors Sidebar -->
+                <div class="selector-sidebar">
+                    <h3>SELECT WORLDS SYSTEM</h3>
+                    <div class="selector-list">
+                        <button class="selector-btn active" onclick="selectFact(0)">
+                            <i class="fa-solid fa-circle-half-stroke"></i> Jupiter & Europa
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(1)">
+                            <i class="fa-solid fa-ring"></i> Saturn & Titan
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(2)">
+                            <i class="fa-solid fa-circle-chevron-down"></i> Mars & Phobos
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(3)">
+                            <i class="fa-solid fa-earth-americas"></i> Earth & Luna
+                        </button>
+                        <button class="selector-btn" onclick="selectFact(4)">
+                            <i class="fa-solid fa-rotate"></i> Pluto & Charon
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Core Laboratory Viewport -->
+                <div class="simulator-main">
+                    <div class="simulator-header-ops">
+                        <div class="telemetry-online-tag">
+                            <span class="pulse-dot"></span>
+                            <span id="active-fact-title">JUPITER TIDAL HEATING MODEL</span>
+                        </div>
+                        <div class="hud-timer">SIM ELAPSED SECS: <span id="ops-clock">000.00</span></div>
+                    </div>
+
+                    <div class="viewport-hud-layout">
+                        <!-- Canvas Screen Frame -->
+                        <div class="viewport-frame">
+                            <canvas id="fact-canvas"></canvas>
+                            <!-- High-Tech Target Crosshair Overlays -->
+                            <div class="viewport-overlay-corner top-left"></div>
+                            <div class="viewport-overlay-corner top-right"></div>
+                            <div class="viewport-overlay-corner bottom-left"></div>
+                            <div class="viewport-overlay-corner bottom-right"></div>
+                        </div>
+
+                        <!-- Parameter Tuning Controls Dashboard -->
+                        <div class="controls-card">
+                            <h3>ORBITAL CONTROLS</h3>
+                            
+                            <div id="dynamic-controls-container" class="sliders-list">
+                                <!-- Generated Dynamically in Javascript -->
+                            </div>
+
+                            <!-- Realtime HUD Calculations Deck -->
+                            <div class="hud-stats-box">
+                                <h4>TELEMETRY OUTPUTS (CALCULATED LIVE)</h4>
+                                <div class="hud-stats-grid" id="hud-readouts-container">
+                                    <!-- Populated Dynamically in JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planetary Radio Linker Section (Radio Decoder) -->
+    <section id="comms-link" class="section-padding comms-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">PLANETARY SPECTRUM RECEIVER</span>
+                <h2 class="glowing-heading">Planetary Radio Decoder</h2>
+                <p>Tune in to magnetospheric decametric radio bursts. Align antenna frequencies to match celestial body radio signatures to decrypt telemetry data.</p>
+            </div>
+
+            <div class="comms-box">
+                <!-- Dual Oscilloscope Screen Panel -->
+                <div class="oscilloscope-hud">
+                    <div class="oscilloscope-screen-box">
+                        <span class="oscilloscope-label">MAGNETOSPHERIC OBSERVATION SCREEN</span>
+                        <canvas id="dsn-canvas"></canvas>
+                        <div class="screen-glare"></div>
+                    </div>
+
+                    <!-- Alignment Locking Telemetry Panel -->
+                    <div class="tuning-lock-deck">
+                        <div class="lock-metric-box">
+                            <span class="metric-label">CARRIER OSCILLATOR LOCK</span>
+                            <div class="metric-value" id="lock-percent">0%</div>
+                        </div>
+                        <div class="alignment-bar-container">
+                            <div class="alignment-bar" id="lock-progress" style="width: 0%"></div>
+                        </div>
+                        <button id="comms-decrypt-btn" class="btn-lock" disabled>
+                            <i class="fa-solid fa-lock"></i> SPECTRUM UNLOCKED
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Signal Dials Control Grid -->
+                <div class="dials-grid-panel">
+                    <h3>DSN PLANETARY RADIO TUNER</h3>
+                    <p class="tuner-instruction">Match incoming planetary wave (Cyan) with the targeted radio emission signature (Magenta).</p>
+                    
+                    <div class="dials-controls">
+                        <!-- Frequency Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Carrier Frequency</span>
+                                <span class="dial-value" id="dial-val-freq">10 MHz</span>
+                            </div>
+                            <input type="range" id="dial-freq" min="5" max="50" value="10" class="neon-slider">
+                        </div>
+
+                        <!-- Phase Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Phase Shift</span>
+                                <span class="dial-value" id="dial-val-phase">30°</span>
+                            </div>
+                            <input type="range" id="dial-phase" min="0" max="360" value="30" class="neon-slider">
+                        </div>
+
+                        <!-- Gain Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Antenna Gain Amp</span>
+                                <span class="dial-value" id="dial-val-gain">15 dB</span>
+                            </div>
+                            <input type="range" id="dial-gain" min="5" max="100" value="15" class="neon-slider">
+                        </div>
+
+                        <!-- Azimuth Dial -->
+                        <div class="dial-card">
+                            <div class="dial-header">
+                                <span class="dial-label">Atmospheric Filter</span>
+                                <span class="dial-value" id="dial-val-azimuth">10 MHz</span>
+                            </div>
+                            <input type="range" id="dial-azimuth" min="2" max="60" value="10" class="neon-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glowing Retro Scientific Decrypted Transcript Logs -->
+            <div class="terminal-deck-wrapper" id="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="t-dot red"></span>
+                        <span class="t-dot yellow"></span>
+                        <span class="t-dot green"></span>
+                    </div>
+                    <span class="terminal-title">PLANETARY TELEMETRY DECRYPTION DECK</span>
+                    <i class="fa-solid fa-satellite-dish terminal-status-icon"></i>
+                </div>
+                <div class="terminal-screen" id="decrypted-screen">
+                    <p class="term-dim">SYSTEM ONLINE // ANTENNAS CONNECTED // PLANETARY RADIO DISCONNECTED...</p>
+                    <p class="term-dim">> Tune receiver parameters above to align cyan signal and decipher world magnetosphere echoes...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Sliding science Manual / Study Drawer -->
+    <div id="student-drawer" class="student-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-user-astronaut"></i>
+                <h2>SCIENCE MANUAL</h2>
+            </div>
+            <button id="drawer-close" class="drawer-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-tabs">
+            <button id="tab-btn-science" class="drawer-tab-btn active" onclick="switchDrawerTab(0)">
+                <i class="fa-solid fa-book-atlas"></i>
+                <span>Orbits & Physics</span>
+            </button>
+            <button id="tab-btn-code" class="drawer-tab-btn" onclick="switchDrawerTab(1)">
+                <i class="fa-solid fa-code"></i>
+                <span>Canvas Math</span>
+            </button>
+            <button id="tab-btn-inspector" class="drawer-tab-btn" onclick="switchDrawerTab(2)">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>State Debugger</span>
+            </button>
+        </div>
+
+        <div class="drawer-body">
+            <!-- Science Content Tab -->
+            <div id="drawer-tab-science" class="drawer-tab-content active">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- Canvas Code Breakdown Tab -->
+            <div id="drawer-tab-code" class="drawer-tab-content">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- State Debugger Live Inspection Tab -->
+            <div id="drawer-tab-inspector" class="drawer-tab-content">
+                <h3>🔍 Telemetry Inspector</h3>
+                <p>This console outputs dynamic variables within the global JavaScript <code>state</code> structure in real time as sliders move.</p>
+                <div class="inspector-card">
+                    <h4>GLOBAL STATE CONSTANTS</h4>
+                    <pre id="inspect-state" class="inspector-json">Initializing feeds...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>CELESTIAL<span>WORLDS</span></h2>
+                <p>An interactive, educational simulator detailing barycenter mechanics, tidal force warpings, ring gaps, and atmospheric profiles of solar bodies.</p>
+            </div>
+            <div class="footer-links">
+                <h4>World Navigator</h4>
+                <a href="#origin"><i class="fa-solid fa-angle-right"></i> Explore Cards</a>
+                <a href="#playground"><i class="fa-solid fa-angle-right"></i> Planetary Lab</a>
+                <a href="#comms-link"><i class="fa-solid fa-angle-right"></i> Radio Decoder</a>
+            </div>
+            <div class="footer-links">
+                <h4>Cosmic Portals</h4>
+                <a href="universe.html"><i class="fa-solid fa-angles-right"></i> Universe Hub</a>
+                <a href="phenomana.html"><i class="fa-solid fa-angles-right"></i> Mysterious Phenomena</a>
+                <a href="missions.html"><i class="fa-solid fa-angles-right"></i> Space Missions</a>
+            </div>
+            <div class="footer-links">
+                <h4>System Portals</h4>
+                <a href="planets.html" class="active"><i class="fa-solid fa-angles-right"></i> Planets & Moons</a>
+                <a href="facts.html"><i class="fa-solid fa-angles-right"></i> Cosmic Facts</a>
+                <a href="discoveries.html"><i class="fa-solid fa-angles-right"></i> Latest Discoveries</a>
+            </div>
+            <div class="footer-meta">
+                <p>&copy; 2026 Celestial Worlds Explorer. Built for physics students. Solar orbits synchronized.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script JS -->
+    <script src="planets.js"></script>
+</body>
+</html>
